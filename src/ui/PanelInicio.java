@@ -39,15 +39,10 @@ public class PanelInicio extends javax.swing.JPanel {
         labelTitulo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         labelTitulo.setText("Bienvenido al Sistema Experto de Planificacion Aerea");
 
-        labelDescripcionGeneral.setText("Aqui viene la descripcion del proposito de la aplicacion: ");
+        labelDescripcionGeneral.setText("Aqui viene la descripcion del proposito de la aplicacion ");
 
         botonEmpezar.setText("Empezar");
         botonEmpezar.setName("botonEmpezar"); // NOI18N
-        botonEmpezar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonEmpezarActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -76,10 +71,6 @@ public class PanelInicio extends javax.swing.JPanel {
                 .addGap(107, 107, 107))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void botonEmpezarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEmpezarActionPerformed
-        
-    }//GEN-LAST:event_botonEmpezarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

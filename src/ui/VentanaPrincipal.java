@@ -17,7 +17,8 @@ import javax.swing.JPanel;
  */
 public class VentanaPrincipal extends javax.swing.JFrame implements ActionListener {
 
-    private PanelPrincipal panelPrincipal;
+    private PanelUbicacion panelUbicacion;
+    private PanelDestino panelDestino;
     private PanelInicio panelInicio;
     /**
      * Creates new form VentanaPrincipal
@@ -39,7 +40,6 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Planificacion Aerea Militar");
         setMinimumSize(new java.awt.Dimension(800, 600));
-        setPreferredSize(new java.awt.Dimension(800, 600));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -81,10 +81,13 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
 
     private void init() {
         panelInicio = new PanelInicio();
-        panelInicio.setVisible(true);
         panelInicio.addOnClickEmpezarEventListener(this);
         
-        panelPrincipal = new PanelPrincipal();
+        panelUbicacion = new PanelUbicacion();
+        panelUbicacion.addOnClickEmpezarEventListener(this);
+        
+        panelDestino = new PanelDestino();        
+        
         getContentPane().add(panelInicio);
         pack();
     }
@@ -94,8 +97,11 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
         if(source instanceof JButton) {
             JButton boton = (JButton) source;
             if(boton.getName().equals("botonEmpezar")) {
-                cambiarPanel(panelPrincipal);
-            }            
+                cambiarPanel(panelUbicacion);
+            }
+           if(boton.getName().equals("botonSiguiente")) {
+               cambiarPanel(panelDestino);
+           }           
         }
     }
 

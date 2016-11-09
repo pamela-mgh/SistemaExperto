@@ -72,9 +72,6 @@
         <Property name="text" type="java.lang.String" value="Empezar"/>
         <Property name="name" type="java.lang.String" value="botonEmpezar" noResource="true"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonEmpezarActionPerformed"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>

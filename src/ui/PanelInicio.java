@@ -39,7 +39,7 @@ public class PanelInicio extends javax.swing.JPanel {
         labelTitulo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         labelTitulo.setText("Bienvenido al Sistema Experto de Planificacion Aerea");
 
-        labelDescripcionGeneral.setText("Aqui viene la descripcion del proposito de la aplicacion ");
+        labelDescripcionGeneral.setText("Aqui viene la descripcion del proposito de la aplicacion: ");
 
         botonEmpezar.setText("Empezar");
         botonEmpezar.setName("botonEmpezar"); // NOI18N

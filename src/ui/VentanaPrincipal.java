@@ -89,7 +89,6 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
         pack();
     }
 
-    @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if(source instanceof JButton) {

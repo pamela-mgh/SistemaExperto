@@ -5,17 +5,26 @@
  */
 package ui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.GroupLayout;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Nicole
  */
-public class VentanaPrincipal extends javax.swing.JFrame {
+public class VentanaPrincipal extends javax.swing.JFrame implements ActionListener {
 
+    private PanelPrincipal panelPrincipal;
+    private PanelInicio panelInicio;
     /**
      * Creates new form VentanaPrincipal
      */
     public VentanaPrincipal() {
         initComponents();
+        init();
     }
 
     /**
@@ -27,72 +36,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelInicio = new javax.swing.JPanel();
-        botonEmpezar = new javax.swing.JButton();
-        labelDescripcionGeneral = new javax.swing.JLabel();
-        labelTitulo = new javax.swing.JLabel();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Planificacion Aerea Militar");
         setMinimumSize(new java.awt.Dimension(800, 600));
         setPreferredSize(new java.awt.Dimension(800, 600));
 
-        botonEmpezar.setText("Empezar");
-        botonEmpezar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonEmpezarActionPerformed(evt);
-            }
-        });
-
-        labelDescripcionGeneral.setText("Aqui viene la descripcion del proposito de la aplicacion ");
-
-        labelTitulo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        labelTitulo.setText("Bienvenido al Sistema Experto de Planificacion Aerea");
-
-        javax.swing.GroupLayout panelInicioLayout = new javax.swing.GroupLayout(panelInicio);
-        panelInicio.setLayout(panelInicioLayout);
-        panelInicioLayout.setHorizontalGroup(
-            panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInicioLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(botonEmpezar)
-                .addGap(75, 75, 75))
-            .addGroup(panelInicioLayout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addGroup(panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelTitulo)
-                    .addComponent(labelDescripcionGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(191, Short.MAX_VALUE))
-        );
-        panelInicioLayout.setVerticalGroup(
-            panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInicioLayout.createSequentialGroup()
-                .addGap(72, 72, 72)
-                .addComponent(labelTitulo)
-                .addGap(18, 18, 18)
-                .addComponent(labelDescripcionGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
-                .addComponent(botonEmpezar)
-                .addGap(52, 52, 52))
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelInicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelInicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void botonEmpezarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEmpezarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botonEmpezarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -129,10 +79,33 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
     }
 
+    private void init() {
+        panelInicio = new PanelInicio();
+        panelInicio.setVisible(true);
+        panelInicio.addOnClickEmpezarEventListener(this);
+        
+        panelPrincipal = new PanelPrincipal();
+        getContentPane().add(panelInicio);
+        pack();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Object source = e.getSource();
+        if(source instanceof JButton) {
+            JButton boton = (JButton) source;
+            if(boton.getName().equals("botonEmpezar")) {
+                cambiarPanel(panelPrincipal);
+            }            
+        }
+    }
+
+    private void cambiarPanel(JPanel panel) {
+        getContentPane().removeAll();
+        add(panel);
+        pack();
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonEmpezar;
-    private javax.swing.JLabel labelDescripcionGeneral;
-    private javax.swing.JLabel labelTitulo;
-    private javax.swing.JPanel panelInicio;
     // End of variables declaration//GEN-END:variables
 }

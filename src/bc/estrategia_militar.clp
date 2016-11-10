@@ -107,3 +107,10 @@
     (modify ?ubicacion_actual (id ?finId))
     (modify ?plan (camino ?plan.camino ?finId))
     (printout t "la ubicacion actual es: " ?ubicacion_actual.id crlf))
+
+(defrule llega_a_destino
+    (ubicacion_actual (id ?uId))
+    (ubicacion_destino {id == ?uId})
+    =>
+    (printout t "la ubicacion final es: " ?ubicacion_actual.id crlf)
+    (halt))

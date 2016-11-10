@@ -5,6 +5,8 @@
  */
 package ui;
 
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author Nicole
@@ -36,14 +38,10 @@ public class PanelDestino extends javax.swing.JPanel {
         labelPregunta.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         labelPregunta.setText("Cual es el destino al que quiere ir?");
 
-        comboBoxRespuesta.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        comboBoxRespuesta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBoxRespuestaActionPerformed(evt);
-            }
-        });
+        comboBoxRespuesta.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Base Militar La Paz", "Base Militar Cochabamba", "Base Militar Santa Cruz" }));
 
         botonSiguiente.setText("Siguiente");
+        botonSiguiente.setName("botonDestinoSiguiente"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -75,14 +73,17 @@ public class PanelDestino extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void comboBoxRespuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxRespuestaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboBoxRespuestaActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonSiguiente;
     private javax.swing.JComboBox<String> comboBoxRespuesta;
     private javax.swing.JLabel labelPregunta;
     // End of variables declaration//GEN-END:variables
+    public int getRespuesta() {
+        return comboBoxRespuesta.getSelectedIndex();
+    }
+
+    void addOnClickSiguienteEventListener(ActionListener actionListener) {
+        botonSiguiente.addActionListener(actionListener);
+    }
 }

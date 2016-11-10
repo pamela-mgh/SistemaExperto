@@ -13,7 +13,6 @@ import java.awt.event.ActionListener;
  */
 @SuppressWarnings("serial")
 public class PanelUbicacion extends javax.swing.JPanel {
-
     /**
      * Creates new form PanelPrincipal
      */
@@ -39,15 +38,10 @@ public class PanelUbicacion extends javax.swing.JPanel {
         labelPregunta.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         labelPregunta.setText("Donde se ubica actualmente?");
 
-        comboBoxRespuesta.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        comboBoxRespuesta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBoxRespuestaActionPerformed(evt);
-            }
-        });
+        comboBoxRespuesta.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Base Militar La Paz", "Base Militar Cochabamba", "Base Militar Santa Cruz" }));
 
         botonSiguiente.setText("Siguiente");
-        botonSiguiente.setName("botonSiguiente"); // NOI18N
+        botonSiguiente.setName("botonUbicacionSiguiente"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -78,11 +72,7 @@ public class PanelUbicacion extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void comboBoxRespuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxRespuestaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboBoxRespuestaActionPerformed
-
-    void addOnClickEmpezarEventListener(ActionListener actionListener) {
+    void addOnClickSiguienteEventListener(ActionListener actionListener) {
         this.botonSiguiente.addActionListener(actionListener);
     }
 
@@ -91,4 +81,8 @@ public class PanelUbicacion extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> comboBoxRespuesta;
     private javax.swing.JLabel labelPregunta;
     // End of variables declaration//GEN-END:variables
+
+    public int getRespuesta() {
+        return comboBoxRespuesta.getSelectedIndex();
+    }
 }

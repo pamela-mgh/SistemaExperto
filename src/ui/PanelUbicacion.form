@@ -65,25 +65,22 @@
     <Component class="javax.swing.JComboBox" name="comboBoxRespuesta">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
+          <StringArray count="3">
+            <StringItem index="0" value="Base Militar La Paz"/>
+            <StringItem index="1" value="Base Militar Cochabamba"/>
+            <StringItem index="2" value="Base Militar Santa Cruz"/>
           </StringArray>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboBoxRespuestaActionPerformed"/>
-      </Events>
       <AuxValues>
+        <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="PanelUbicacion_comboBoxRespuesta"/>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="botonSiguiente">
       <Properties>
         <Property name="text" type="java.lang.String" value="Siguiente"/>
-        <Property name="name" type="java.lang.String" value="botonSiguiente" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="botonUbicacionSiguiente" noResource="true"/>
       </Properties>
     </Component>
   </SubComponents>

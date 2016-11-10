@@ -17,12 +17,12 @@ public class ControladorPrincipal {
     private void configurarComponentes() {
         try {
             controladorMotorInferencia = new ControladorMotorInferencia();
-            controladorMotorInferencia.ejecutar();
+            ventanaPrincipal = new VentanaPrincipal(controladorMotorInferencia);
         } catch (JessException ex) {
             Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        ventanaPrincipal = new VentanaPrincipal();
+        
     }
     
     public void iniciar() {

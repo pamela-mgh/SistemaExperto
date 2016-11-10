@@ -1,14 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ui;
 
+import controladores.ControladorMotorInferencia;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import jess.JessException;
 
 /**
  *
@@ -19,10 +18,11 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
     private PanelUbicacion panelUbicacion;
     private PanelDestino panelDestino;
     private PanelInicio panelInicio;
-    /**
-     * Creates new form VentanaPrincipal
-     */
-    public VentanaPrincipal() {
+    private PanelRespuesta panelRespuesta;
+    private ControladorMotorInferencia controladorMotorInferencia;
+
+    public VentanaPrincipal(ControladorMotorInferencia controladorMotorInferencia) {
+        this.controladorMotorInferencia = controladorMotorInferencia;
         initComponents();
         init();
     }
@@ -43,30 +43,64 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
     private void init() {
         panelInicio = new PanelInicio();
         panelInicio.addOnClickEmpezarEventListener(this);
-        
+
         panelUbicacion = new PanelUbicacion();
-        panelUbicacion.addOnClickEmpezarEventListener(this);
+        panelUbicacion.addOnClickSiguienteEventListener(this);
+
+        panelDestino = new PanelDestino();
+        panelDestino.addOnClickSiguienteEventListener(this);
         
-        panelDestino = new PanelDestino();        
-        
+        panelRespuesta = new PanelRespuesta();
+
         getContentPane().add(panelInicio);
         pack();
     }
 
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
-        if(source instanceof JButton) {
+        if (source instanceof JButton) {
             JButton boton = (JButton) source;
-            if(boton.getName().equals("botonEmpezar")) {
+            if (boton.getName().equals("botonEmpezar")) {
                 cambiarPanel(panelUbicacion);
             }
-           if(boton.getName().equals("botonSiguiente")) {
-               cambiarPanel(panelDestino);
-           }           
+            if (boton.getName().equals("botonUbicacionSiguiente")) {
+                switch (panelUbicacion.getRespuesta()) {
+                    case 0:
+                        controladorMotorInferencia.evaluar("(ubicacion_inicial (id bm_la_paz))");
+                        break;
+                    case 1:
+                        controladorMotorInferencia.evaluar("(ubicacion_inicial (id bm_cbba))");
+                        break;
+                    case 2:
+                        controladorMotorInferencia.evaluar("(ubicacion_inicial (id bm_santa_cruz))");
+                        break;
+                }
+                cambiarPanel(panelDestino);
+            } else if (boton.getName().equals("botonDestinoSiguiente")) {
+                switch (panelDestino.getRespuesta()) {
+                    case 0:
+                        controladorMotorInferencia.evaluar("(ubicacion_destino (id bm_la_paz))");
+                        break;
+                    case 1:
+                        controladorMotorInferencia.evaluar("(ubicacion_destino (id bm_cbba))");
+                        break;
+                    case 2:
+                        controladorMotorInferencia.evaluar("(ubicacion_destino (id bm_santa_cruz))");
+                        
+                        break;
+                }
+                cambiarPanel(panelRespuesta);
+                try {
+                    controladorMotorInferencia.ejecutar();
+                    controladorMotorInferencia.getCamino();
+                    panelRespuesta.mostrarCamino(controladorMotorInferencia.getCamino());
+                } catch (JessException ex) {
+                    Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
     }
 

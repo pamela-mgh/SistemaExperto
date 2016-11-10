@@ -5,3 +5,4 @@ build.xml
 /build/
 /dist/
 .project
+.classpath

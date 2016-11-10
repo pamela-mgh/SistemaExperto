@@ -15,7 +15,7 @@ public class ControladorMotorInferencia {
     }
     
     public void ejecutar() throws JessException {
-    	motorInferencia.assertString("(ubicacion_inicial (id bm_cochabamba))");
+    	motorInferencia.assertString("(ubicacion_inicial (id bm_cbba))");
         motorInferencia.run();
         Iterator<Fact> it = motorInferencia.listFacts();
         while (it.hasNext()) {

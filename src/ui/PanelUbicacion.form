@@ -59,7 +59,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="&#xbf;Donde se ubica actualmente?"/>
+        <Property name="text" type="java.lang.String" value="Donde se ubica actualmente?"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="comboBoxRespuesta">

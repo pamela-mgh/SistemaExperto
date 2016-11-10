@@ -11,11 +11,13 @@ public class ControladorMotorInferencia {
     
     public ControladorMotorInferencia() throws JessException {
         motorInferencia = new Rete();
+        motorInferencia.reset();
         motorInferencia.batch("bc/estrategia_militar.clp");
     }
     
     public void ejecutar() throws JessException {
     	motorInferencia.assertString("(ubicacion_inicial (id bm_cbba))");
+    	motorInferencia.assertString("(ubicacion_destino (id bm_santa_cruz))");
         motorInferencia.run();
         Iterator<Fact> it = motorInferencia.listFacts();
         while (it.hasNext()) {

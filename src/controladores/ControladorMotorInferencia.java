@@ -11,16 +11,15 @@ public class ControladorMotorInferencia {
     
     public ControladorMotorInferencia() throws JessException {
         motorInferencia = new Rete();
-        motorInferencia.batch("bc/templates.clp");
-        motorInferencia.batch("bc/hechos.clp");
-        motorInferencia.batch("bc/reglas.clp");
+        motorInferencia.batch("bc/estrategia_militar.clp");
     }
     
     public void ejecutar() throws JessException {
+    	motorInferencia.assertString("(ubicacion_inicial (id bm_cochabamba))");
         motorInferencia.run();
-        Iterator it = motorInferencia.listFacts();
+        Iterator<Fact> it = motorInferencia.listFacts();
         while (it.hasNext()) {
-            Fact hecho = (Fact) it.next();
+            Fact hecho = it.next();
             System.out.println(hecho);
         }
     }

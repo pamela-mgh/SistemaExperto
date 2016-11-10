@@ -8,7 +8,7 @@
 ; RUTAS
 
 (assert (ruta (inicio bm_santa_cruz) (fin bm_la_paz)))
-(assert (ruta (inicio bm_la_paz) (fin bm_santa_cruz)))
+(assert (ruta (inicio bm_la_paz) (fin bm_santa_cruz) (estado COMPROMETIDO)))
 
 (assert (ruta (inicio bm_santa_cruz) (fin bm_cbba)))
 (assert (ruta (inicio bm_cbba) (fin bm_santa_cruz) ))

@@ -37,7 +37,7 @@ public class PanelUbicacion extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(800, 600));
 
         labelPregunta.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        labelPregunta.setText("Â¿Donde se ubica actualmente?");
+        labelPregunta.setText("¿Donde se ubica actualmente?");
 
         comboBoxRespuesta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboBoxRespuesta.addActionListener(new java.awt.event.ActionListener() {

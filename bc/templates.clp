@@ -22,12 +22,12 @@
     (slot cantidad (type INTEGER)))
 
 
-; UBICACIÓN DE INICO Y UBICACIÓN DE DESTINO
+; UBICACION DE INICO Y UBICACION DE DESTINO
 
 (deftemplate ubicacion_inicial
-    "La ubicación inicial del vuelo"
+    "La ubicacion inicial del vuelo"
     (slot id))
 
 (deftemplate ubicacion_destino
-    "La ubicación de destino del vuelo"
+    "La ubicacion de destino del vuelo"
     (slot id))

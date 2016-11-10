@@ -34,7 +34,7 @@ public class PanelDestino extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(800, 600));
 
         labelPregunta.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        labelPregunta.setText("Â¿Cual es el destino al que quiere ir?");
+        labelPregunta.setText("¿Cual es el destino al que quiere ir?");
 
         comboBoxRespuesta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboBoxRespuesta.addActionListener(new java.awt.event.ActionListener() {

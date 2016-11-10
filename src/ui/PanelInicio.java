@@ -39,7 +39,7 @@ public class PanelInicio extends javax.swing.JPanel {
         labelTitulo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         labelTitulo.setText("Bienvenido al Sistema Experto de Planificacion Aerea");
 
-        labelDescripcionGeneral.setText("Aqui viene la descripcion del proposito de la aplicacion ");
+        labelDescripcionGeneral.setText("El sistema Experto busca un plan de transporte aereo dado una ubicacion inicial y un destino ");
 
         botonEmpezar.setText("Empezar");
         botonEmpezar.setName("botonEmpezar"); // NOI18N
@@ -56,7 +56,7 @@ public class PanelInicio extends javax.swing.JPanel {
                 .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelTitulo)
-                    .addComponent(labelDescripcionGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelDescripcionGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(

@@ -32,8 +32,8 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="labelTitulo" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="labelDescripcionGeneral" alignment="0" min="-2" pref="499" max="-2" attributes="0"/>
+                  <Component id="labelTitulo" min="-2" max="-2" attributes="0"/>
+                  <Component id="labelDescripcionGeneral" min="-2" pref="545" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -64,7 +64,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="labelDescripcionGeneral">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Aqui viene la descripcion del proposito de la aplicacion "/>
+        <Property name="text" type="java.lang.String" value="El sistema Experto busca un plan de transporte aereo dado una ubicacion inicial y un destino "/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="botonEmpezar">

@@ -1,16 +1,27 @@
 package controladores;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import jess.JessException;
 import ui.VentanaPrincipal;
 
 public class ControladorPrincipal {
     
     private VentanaPrincipal ventanaPrincipal;
+    private ControladorMotorInferencia controladorMotorInferencia;
     
     public ControladorPrincipal() {
         configurarComponentes();
     }
 
     private void configurarComponentes() {
+        try {
+            controladorMotorInferencia = new ControladorMotorInferencia();
+            controladorMotorInferencia.ejecutar();
+        } catch (JessException ex) {
+            Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         ventanaPrincipal = new VentanaPrincipal();
     }
     

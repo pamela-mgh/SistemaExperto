@@ -13,7 +13,6 @@
     (slot estado (default DISPONIBLE))
     (slot visitado (default FALSE)))
 
-
 ; Carga
 
 (deftemplate suministros
@@ -25,7 +24,6 @@
     "Tipo de carga personal militar seleccionada"
     (slot cantidad (type INTEGER))
     (slot id-avion (type STRING)))
-
 
 ; Ubicacion de inicio, destino y actual
 
@@ -43,7 +41,6 @@
 
 (deftemplate plan
     (multislot camino))
-
 
 ; Avion
 (deftemplate avion
@@ -127,3 +124,16 @@
     (modify ?ubicacion_actual (id ?finId))
     (modify ?plan (camino ?plan.camino ?finId))
     (printout t "la ubicacion actual es: " ?ubicacion_actual.id crlf))
+
+
+(defrule por-cada-avion-que-lleva-personal
+  (forall (avion (id-avion ?id) (capacidadMax ?max))
+          (personal_militar (cantidad ?cant) (id-avion ?id)))
+   =>
+  (printout t "Avion lleva personal militar como carga." crlf))
+
+(defrule por-cada-avion-que-lleva-suministros
+  (forall (avion (id-avion ?id) (capacidadMax ?max))
+          (suministros (peso ?peso) (id-avion ?id)))
+   =>
+  (printout t "Avion lleva suministros como carga." crlf))

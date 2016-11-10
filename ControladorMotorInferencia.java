@@ -35,6 +35,10 @@ public ControladorMotorInferencia() throws JessException {
         motorInferencia.assertString("(ubicacion_inicial (id bm_sucre))");
     	motorInferencia.assertString("(ubicacion_destino (id bm_potosi))");
         motorInferencia.run();
+        System.out.println("\n\n");
+        /*motorInferencia.assertString("(suministros (peso 100)(id-avion \"AX-01\")");
+        motorInferencia.assertString("(avion (id-avion \"AX-01\") (capacidadMax 100))");
+        motorInferencia.run();*/
          int i = 1;
          Iterator<Fact> it = motorInferencia.listFacts();
          System.out.println("\nLISTA DE HECHOS ");

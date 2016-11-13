@@ -43,28 +43,28 @@
 
 (deffacts escenario "Definicion del escenario"
     ; Ubicaciones
-        (ubicacion (id bm_la_paz) (nombre "Base Militar La Paz"))
+    (ubicacion (id bm_la_paz) (nombre "Base Militar La Paz"))
 	(ubicacion (id bm_cbba) (nombre "Base Militar Cochabamba") (estado NO_DISPONIBLE))
 	(ubicacion (id bm_santa_cruz) (nombre "Base Militar Santa Cruz"))
         (ubicacion (id bm_sucre) (nombre "Base Militar Sucre"))
         (ubicacion (id bm_potosi) (nombre "Base Militar Potosi"))
 	
     ; Rutas	
-        (ruta (inicio bm_santa_cruz) (fin bm_la_paz))
+    (ruta (inicio bm_santa_cruz) (fin bm_la_paz))
 	(ruta (inicio bm_la_paz) (fin bm_santa_cruz) (estado COMPROMETIDO))
 	(ruta (inicio bm_santa_cruz) (fin bm_cbba))
 	(ruta (inicio bm_cbba) (fin bm_santa_cruz))
 	(ruta (inicio bm_la_paz) (fin bm_cbba))
 	(ruta (inicio bm_cbba) (fin bm_la_paz))
-        (ruta (inicio bm_sucre) (fin bm_potosi) (estado COMPROMETIDO))
-        (ruta (inicio bm_potosi) (fin bm_sucre))
+    (ruta (inicio bm_sucre) (fin bm_potosi) (estado COMPROMETIDO))
+    (ruta (inicio bm_potosi) (fin bm_sucre))
 
     ; Cargas
-        (carga (tipo suministros) (cantidad 100))
-        (carga (tipo suministros) (cantidad 200))
-        (carga (tipo personal-militar) (cantidad 40)) 
-        (carga (tipo personal-militar) (cantidad 60)) 
-        (carga (tipo vehiculos) (cantidad 30)))
+    (carga (tipo suministros) (cantidad 100))
+    (carga (tipo suministros) (cantidad 200))
+    (carga (tipo personal-militar) (cantidad 40)) 
+    (carga (tipo personal-militar) (cantidad 60)) 
+    (carga (tipo vehiculos) (cantidad 30)))
 
 ; *********
 ; FUNCIONES

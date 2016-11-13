@@ -84,13 +84,12 @@
       (return ?a)
   else
       (return ?b)))
-=======
+
 (deffunction iniciar ()
     (reset)
     (assert (fase preguntar-ubicacion-inicial))
     (run)
     (facts))
->>>>>>> 634890806e6154fbe3ebd7a9104f5207bb154e3d
 
 ; ******
 ; REGLAS

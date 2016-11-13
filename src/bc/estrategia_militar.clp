@@ -78,6 +78,11 @@
     (printout t "SE: Cual es el destino?" crlf)
     (assert (ubicacion-destino (id (read)))))
 
+(deffunction ver-si-carga-mayor-que-capacidad-transporte(?a ?b)
+    (if (> ?a ?b) then
+      (return ?a)
+  else
+      (return ?b)))
 
 ; ******
 ; REGLAS

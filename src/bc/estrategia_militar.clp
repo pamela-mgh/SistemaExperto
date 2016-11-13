@@ -70,6 +70,7 @@
 ; FUNCIONES
 ; *********
 
+<<<<<<< HEAD
 (deffunction preguntar-ubicacion-inicial ()
     (printout t "SE: Cual es la ubicacion inicial?" crlf)
     (assert (ubicacion-inicial (id (read)))))
@@ -83,10 +84,50 @@
       (return ?a)
   else
       (return ?b)))
+=======
+(deffunction iniciar ()
+    (reset)
+    (assert (fase preguntar-ubicacion-inicial))
+    (run)
+    (facts))
+>>>>>>> 634890806e6154fbe3ebd7a9104f5207bb154e3d
 
 ; ******
 ; REGLAS
 ; ******
+
+(defrule si-la-fase-es-preguntar-ubicacion-inicial
+    ?fase <- (fase preguntar-ubicacion-inicial)
+    =>
+    (printout t "SE: Cual es la ubicacion inicial?" crlf)
+    (assert (ubicacion-inicial (id (read))))
+    (retract ?fase)
+    (assert (fase preguntar-ubicacion-destino)))
+
+(defrule si-la-fase-es-preguntar-ubicacion-destino
+    ?fase <- (fase preguntar-ubicacion-destino)
+    =>
+    (printout t "SE: Cual es la ubicacion destino?" crlf)
+    (assert (ubicacion-destino (id (read))))
+    (retract ?fase)
+    (assert (fase preguntar-tipo-de-carga)))
+
+(defrule si-la-fase-es-preguntar-tipo-de-carga
+    ?fase <- (fase preguntar-tipo-de-carga)
+    =>
+    (printout t "SE: Que tipo de carga desea llevar?" crlf)
+    (assert (carga (tipo (read))))
+    (retract ?fase)
+    (assert (fase preguntar-cantidad-de-carga)))
+
+(defrule si-la-fase-es-preguntar-cantidad-de-carga
+    ?fase <- (fase preguntar-cantidad-de-carga)
+    ?carga <- (carga (tipo ?tipo))
+    =>
+    (printout t "SE: Cual es la cantidad de " ?tipo "?" crlf)
+    (modify ?carga (cantidad (read)))
+    (retract ?fase)
+    (assert (fase verificar-disponibilidad-transporte)))
 
 (defrule aeropuerto-inicial-no-disponible
     "Verifica si el aeropuerto inicial no esta disponible"
@@ -102,7 +143,4 @@
     =>
     (printout t "Aeropuerto destino no disponible" crlf))
 
-(reset)
-(preguntar-ubicacion-inicial)
-(preguntar-ubicacion-destino)
-(run)
+(iniciar)

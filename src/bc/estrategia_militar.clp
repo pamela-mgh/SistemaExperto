@@ -66,12 +66,6 @@
         (carga (tipo personal-militar) (cantidad 60)) 
         (carga (tipo vehiculos) (cantidad 30)))
 
-
-
-    ; Transporte
-    ; (transporte (id "AX-01") (tipo avion) (capacidad 100) (combustible 1000) (ubicacion (id bm_la_paz) (nombre "Base Militar La Paz"))))
-
-
 ; *********
 ; FUNCIONES
 ; *********

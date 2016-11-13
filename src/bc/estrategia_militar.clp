@@ -34,8 +34,7 @@
     (slot tipo) ;<tipo> puede ser ( avion | helicoptero )
     (slot capacidad (type INTEGER));la capacidad maxima de carga
     (slot combustible (type INTEGER))
-    (slot ubicacion)
-    )
+    (slot ubicacion (default base-militar)))
 
 ; ********************
 ; DEFINICION DE HECHOS
@@ -64,7 +63,12 @@
         (carga (tipo suministros) (cantidad 200))
         (carga (tipo personal-militar) (cantidad 40)) 
         (carga (tipo personal-militar) (cantidad 60)) 
-        (carga (tipo vehiculos) (cantidad 30)))
+        (carga (tipo vehiculos) (cantidad 30))
+
+    ;Transporte
+        (transporte (id A0X-1) (tipo avion) (capacidad 80) (combustible 100) (ubicacion bm_la_paz))
+        (transporte (id A0X-3) (tipo avion) (capacidad 100) (combustible 100))
+)
 
 ; *********
 ; FUNCIONES
@@ -72,9 +76,9 @@
 
 (deffunction ver-si-carga-mayor-que-capacidad-transporte(?a ?b)
     (if (> ?a ?b) then
-      (return ?a)
+      (return true)
   else
-      (return ?b)))
+      (return false)))
 
 (deffunction iniciar ()
     (reset)

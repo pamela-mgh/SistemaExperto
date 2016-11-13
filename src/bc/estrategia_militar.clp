@@ -70,15 +70,6 @@
 ; FUNCIONES
 ; *********
 
-<<<<<<< HEAD
-(deffunction preguntar-ubicacion-inicial ()
-    (printout t "SE: Cual es la ubicacion inicial?" crlf)
-    (assert (ubicacion-inicial (id (read)))))
-
-(deffunction preguntar-ubicacion-destino ()
-    (printout t "SE: Cual es el destino?" crlf)
-    (assert (ubicacion-destino (id (read)))))
-
 (deffunction ver-si-carga-mayor-que-capacidad-transporte(?a ?b)
     (if (> ?a ?b) then
       (return ?a)

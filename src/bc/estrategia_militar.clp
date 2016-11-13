@@ -33,6 +33,8 @@
     (slot id) ;<id> es el identificador del transporte
     (slot tipo) ;<tipo> puede ser ( avion | helicoptero )
     (slot capacidad) ;la capacidad maxima de carga
+    (slot combustible)
+    (slot ubicacion)
     )
 
 ; ********************

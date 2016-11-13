@@ -1,116 +1,136 @@
-; ######### TEMPLATES #########
-
-; Mapa
-
-(deftemplate ruta
-    (slot estado (default DISPONIBLE))
-    (slot inicio)
-    (slot fin))
+; ********************
+; PLANTILLAS DE HECHOS
+; ********************
 
 (deftemplate ubicacion
+    "Una ubicacion en el mapa de planificacion"
     (slot id)
     (slot nombre (type STRING))
-    (slot estado (default DISPONIBLE))
+    (slot estado (default DISPONIBLE)) ; DISPONIBLE | NO_DISPONIBLE
     (slot visitado (default FALSE)))
 
+(deftemplate ruta
+    "Una ruta une dos ubicaciones"
+    (slot estado (default DISPONIBLE))
+    (slot inicio) ;<inicio> es la ubicacion donde empieza la ruta
+    (slot fin) ;<fin> es la ubicacion donde termina la ruta
+    (slot distancia))
 
-; Carga
-
-(deftemplate suministros
-    "Tipo de carga personal militar seleccionada"
-    (slot peso (type INTEGER)))
-
-(deftemplate personal_militar
-    "Tipo de carga personal militar seleccionada"
+(deftemplate carga
+    "La carga que se desea transportar"
+    (slot tipo) ;<tipo> puede ser ( personal-militar | suministros | vehiculos )
     (slot cantidad (type INTEGER)))
 
-
-; Ubicacion de inicio, destino y actual
-
-(deftemplate ubicacion_inicial
+(deftemplate ubicacion-inicial
     "La ubicacion inicial del vuelo"
-    (slot id))
+    (slot id)) ;<id> es el identificador de la ubicacion inicio
 
-(deftemplate ubicacion_destino
+(deftemplate ubicacion-destino
     "La ubicacion de destino del vuelo"
-    (slot id))
+    (slot id)) ;<id> es el identificador de la ubicacion destino
 
-(deftemplate ubicacion_actual
-    "La ubicacion actual en el razonamiento"
-    (slot id))
+(deftemplate transporte
+    (slot id) ;<id> es el identificador del transporte
+    (slot tipo) ;<tipo> puede ser ( avion | helicoptero )
+    (slot capacidad (type INTEGER));la capacidad maxima de carga
+    (slot combustible (type INTEGER))
+    (slot ubicacion)
+    )
 
-(deftemplate plan
-    (multislot camino))
+; ********************
+; DEFINICION DE HECHOS
+; ********************
 
-; ######### FACTS #########
+(deffacts escenario "Definicion del escenario"
+    ; Ubicaciones
+        (ubicacion (id bm_la_paz) (nombre "Base Militar La Paz"))
+	(ubicacion (id bm_cbba) (nombre "Base Militar Cochabamba") (estado NO_DISPONIBLE))
+	(ubicacion (id bm_santa_cruz) (nombre "Base Militar Santa Cruz"))
+        (ubicacion (id bm_sucre) (nombre "Base Militar Sucre"))
+        (ubicacion (id bm_potosi) (nombre "Base Militar Potosi"))
+	
+    ; Rutas	
+        (ruta (inicio bm_santa_cruz) (fin bm_la_paz))
+	(ruta (inicio bm_la_paz) (fin bm_santa_cruz) (estado COMPROMETIDO))
+	(ruta (inicio bm_santa_cruz) (fin bm_cbba))
+	(ruta (inicio bm_cbba) (fin bm_santa_cruz))
+	(ruta (inicio bm_la_paz) (fin bm_cbba))
+	(ruta (inicio bm_cbba) (fin bm_la_paz))
+        (ruta (inicio bm_sucre) (fin bm_potosi) (estado COMPROMETIDO))
+        (ruta (inicio bm_potosi) (fin bm_sucre))
 
-; Ubicaciones
+    ; Cargas
+        (carga (tipo suministros) (cantidad 100))
+        (carga (tipo suministros) (cantidad 200))
+        (carga (tipo personal-militar) (cantidad 40)) 
+        (carga (tipo personal-militar) (cantidad 60)) 
+        (carga (tipo vehiculos) (cantidad 30)))
 
-(assert (ubicacion (id bm_la_paz) (nombre "Base Militar La Paz")))
-(assert (ubicacion (id bm_cbba) (nombre "Base Militar Cochabamba") (estado NO_DISPONIBLE)))
-(assert (ubicacion (id bm_santa_cruz) (nombre "Base Militar Santa Cruz")))
+; *********
+; FUNCIONES
+; *********
 
-; Rutas
+(deffunction ver-si-carga-mayor-que-capacidad-transporte(?a ?b)
+    (if (> ?a ?b) then
+      (return ?a)
+  else
+      (return ?b)))
 
-(assert (ruta (inicio bm_santa_cruz) (fin bm_la_paz)))
-(assert (ruta (inicio bm_la_paz) (fin bm_santa_cruz) (estado COMPROMETIDO)))
+(deffunction iniciar ()
+    (reset)
+    (assert (fase preguntar-ubicacion-inicial))
+    (run)
+    (facts))
 
-(assert (ruta (inicio bm_santa_cruz) (fin bm_cbba)))
-(assert (ruta (inicio bm_cbba) (fin bm_santa_cruz) ))
+; ******
+; REGLAS
+; ******
 
-(assert (ruta (inicio bm_la_paz) (fin bm_cbba)))
-(assert (ruta (inicio bm_cbba) (fin bm_la_paz)))
+(defrule si-la-fase-es-preguntar-ubicacion-inicial
+    ?fase <- (fase preguntar-ubicacion-inicial)
+    =>
+    (printout t "SE: Cual es la ubicacion inicial?" crlf)
+    (assert (ubicacion-inicial (id (read))))
+    (retract ?fase)
+    (assert (fase preguntar-ubicacion-destino)))
 
-(bind ?plan (assert (plan)))
+(defrule si-la-fase-es-preguntar-ubicacion-destino
+    ?fase <- (fase preguntar-ubicacion-destino)
+    =>
+    (printout t "SE: Cual es la ubicacion destino?" crlf)
+    (assert (ubicacion-destino (id (read))))
+    (retract ?fase)
+    (assert (fase preguntar-tipo-de-carga)))
 
-; ######### REGLAS #########
+(defrule si-la-fase-es-preguntar-tipo-de-carga
+    ?fase <- (fase preguntar-tipo-de-carga)
+    =>
+    (printout t "SE: Que tipo de carga desea llevar?" crlf)
+    (assert (carga (tipo (read))))
+    (retract ?fase)
+    (assert (fase preguntar-cantidad-de-carga)))
 
-; Verifica si el aeropuerto inicial no esta disponible
+(defrule si-la-fase-es-preguntar-cantidad-de-carga
+    ?fase <- (fase preguntar-cantidad-de-carga)
+    ?carga <- (carga (tipo ?tipo))
+    =>
+    (printout t "SE: Cual es la cantidad de " ?tipo "?" crlf)
+    (modify ?carga (cantidad (read)))
+    (retract ?fase)
+    (assert (fase verificar-disponibilidad-transporte)))
 
-(defrule verificar_disponibilidad_de_aeropueto_inicial
-    (ubicacion_inicial (id ?uId))
+(defrule aeropuerto-inicial-no-disponible
+    "Verifica si el aeropuerto inicial no esta disponible"
+    (ubicacion-inicial (id ?uId))
     (ubicacion {id == ?uId && estado == NO_DISPONIBLE})
     =>
-    (assert (aeropuerto_inicial_no_disponible)))
+    (printout t "Aeropuerto inicial no disponible" crlf))
 
-
-; Verifica si el aeropuerto destino no esta disponible
-
-(defrule verificar_disponibilidad_de_aeropueto_destino
-    (ubicacion_destino (id ?uId))
+(defrule aeropuerto-destino-no-disponible
+    "Verifica si el aeropuerto destino no esta disponible"
+    (ubicacion-destino (id ?uId))
     (ubicacion {id == ?uId && estado == NO_DISPONIBLE})
     =>
-    (assert (aeropuerto_destino_no_disponible)))
+    (printout t "Aeropuerto destino no disponible" crlf))
 
-
-; Establecer la ubicacion inicial como actual
-
-(defrule ubicacion_actual_inicial
-    (ubicacion_inicial (id ?uId))
-    ?u <- (ubicacion {id == ?uId && visitado == FALSE})
-    =>
-    (modify ?u (visitado TRUE))
-    (assert (ubicacion_actual (id ?uId)))
-    (modify ?plan (camino ?plan.camino ?uId))
-    (printout t "la ubicacion inicial y actual es: " ?uId crlf))
-
-
-; Establecer la siguiente ubicacion actual
-
-(defrule siguiente_ubicacion
-    ?ubicacion_actual <- (ubicacion_actual (id ?uId))
-    (ruta {inicio == ?uId && estado == DISPONIBLE} (inicio ?inicioId) (fin ?finId))
-    ?inicio <- (ubicacion {id == ?inicioId})
-    ?fin <- (ubicacion {id == ?finId && visitado == FALSE})
-    =>
-    (modify ?fin (visitado TRUE))
-    (modify ?ubicacion_actual (id ?finId))
-    (modify ?plan (camino ?plan.camino ?finId))
-    (printout t "la ubicacion actual es: " ?ubicacion_actual.id crlf))
-
-(defrule llega_a_destino
-    (ubicacion_actual (id ?uId))
-    (ubicacion_destino {id == ?uId})
-    =>
-    (printout t "la ubicacion final es: " ?ubicacion_actual.id crlf)
-    (halt))
+(iniciar)

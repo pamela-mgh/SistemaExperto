@@ -143,7 +143,4 @@
     =>
     (printout t "Aeropuerto destino no disponible" crlf))
 
-(reset)
-(preguntar-ubicacion-inicial)
-(preguntar-ubicacion-destino)
-(run)
+(iniciar)

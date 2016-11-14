@@ -148,7 +148,6 @@
     (carga (cantidad ?cantidad))
     (transporte (id ?id) (tipo ?tipo) (capacidad ?capacidad) (combustible ?compustible) (ubicacion ?ubicacion))
     =>
-    (printout t ?id " es un " ?tipo " con capacidad maxima de: " ?capacidad
-              (if (>= ?cantidad ?cantidad) then " y si" else " y no") " puede llevar la carga" crlf))
-
+   (if (>= ?capacidad ?cantidad) then(printout t ?tipo " " ?id " puede llevar la carga" crlf)))
+    
 (iniciar)

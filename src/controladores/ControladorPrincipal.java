@@ -21,8 +21,6 @@ public class ControladorPrincipal {
         } catch (JessException ex) {
             Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
     }
     
     public void iniciar() {

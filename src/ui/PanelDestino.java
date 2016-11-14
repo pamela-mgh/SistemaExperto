@@ -30,53 +30,72 @@ public class PanelDestino extends javax.swing.JPanel {
     private void initComponents() {
 
         labelPregunta = new javax.swing.JLabel();
-        comboBoxRespuesta = new javax.swing.JComboBox<String>();
+        comboBoxRespuesta = new javax.swing.JComboBox<>();
         botonSiguiente = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(102, 102, 102));
         setMinimumSize(new java.awt.Dimension(800, 600));
+        setPreferredSize(new java.awt.Dimension(800, 600));
 
         labelPregunta.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        labelPregunta.setForeground(new java.awt.Color(255, 255, 255));
         labelPregunta.setText("Cual es el destino al que quiere ir?");
 
-        comboBoxRespuesta.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Base Militar La Paz", "Base Militar Cochabamba", "Base Militar Santa Cruz" }));
+        comboBoxRespuesta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Base Militar La Paz", "Base Militar Cochabamba", "Base Militar Santa Cruz" }));
+        comboBoxRespuesta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxRespuestaActionPerformed(evt);
+            }
+        });
 
         botonSiguiente.setText("Siguiente");
         botonSiguiente.setName("botonDestinoSiguiente"); // NOI18N
+
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nicole\\Documents\\NetBeansProjects\\SistemaExperto\\imagenes\\destino.jpg")); // NOI18N
+        jLabel1.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(48, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(botonSiguiente)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(439, 439, 439)
-                        .addComponent(botonSiguiente))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(240, 240, 240)
-                        .addComponent(comboBoxRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(222, 222, 222)
-                        .addComponent(labelPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(251, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboBoxRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(56, 56, 56))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(202, 202, 202)
-                .addComponent(labelPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(comboBoxRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(67, 67, 67)
+                .addGap(166, 166, 166)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(labelPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)
+                        .addComponent(comboBoxRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
                 .addComponent(botonSiguiente)
-                .addContainerGap(208, Short.MAX_VALUE))
+                .addGap(88, 88, 88))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void comboBoxRespuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxRespuestaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxRespuestaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonSiguiente;
     private javax.swing.JComboBox<String> comboBoxRespuesta;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel labelPregunta;
     // End of variables declaration//GEN-END:variables
     public int getRespuesta() {

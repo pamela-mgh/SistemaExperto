@@ -34,22 +34,18 @@
     (slot tipo) ;<tipo> puede ser ( avion | helicoptero )
     (slot capacidad (type INTEGER));la capacidad maxima de carga
     (slot combustible (type INTEGER))
-    (slot ubicacion)
-    )
+    (slot ubicacion (default base-militar)))
 
 ; ********************
 ; DEFINICION DE HECHOS
 ; ********************
 
 (deffacts escenario "Definicion del escenario"
-    ; Ubicaciones
     (ubicacion (id bm_la_paz) (nombre "Base Militar La Paz"))
 	(ubicacion (id bm_cbba) (nombre "Base Militar Cochabamba") (estado NO_DISPONIBLE))
 	(ubicacion (id bm_santa_cruz) (nombre "Base Militar Santa Cruz"))
-        (ubicacion (id bm_sucre) (nombre "Base Militar Sucre"))
-        (ubicacion (id bm_potosi) (nombre "Base Militar Potosi"))
-	
-    ; Rutas	
+	(ubicacion (id bm_sucre) (nombre "Base Militar Sucre"))
+    (ubicacion (id bm_potosi) (nombre "Base Militar Potosi"))
     (ruta (inicio bm_santa_cruz) (fin bm_la_paz))
 	(ruta (inicio bm_la_paz) (fin bm_santa_cruz) (estado COMPROMETIDO))
 	(ruta (inicio bm_santa_cruz) (fin bm_cbba))
@@ -58,29 +54,35 @@
 	(ruta (inicio bm_cbba) (fin bm_la_paz))
     (ruta (inicio bm_sucre) (fin bm_potosi) (estado COMPROMETIDO))
     (ruta (inicio bm_potosi) (fin bm_sucre))
-
-    ; Cargas
     (carga (tipo suministros) (cantidad 100))
     (carga (tipo suministros) (cantidad 200))
     (carga (tipo personal-militar) (cantidad 40)) 
     (carga (tipo personal-militar) (cantidad 60)) 
-    (carga (tipo vehiculos) (cantidad 30)))
+    (carga (tipo vehiculos) (cantidad 30))
+	(transporte (id A0X-1) (tipo avion) (capacidad 500) (combustible 100) (ubicacion bm_la_paz))
+	(transporte (id A0X-3) (tipo avion) (capacidad 200) (combustible 100))
+	(transporte (id A0X-5) (tipo helicoptero) (capacidad 100) (combustible 80))
+)
 
 ; *********
 ; FUNCIONES
 ; *********
 
-(deffunction ver-si-carga-mayor-que-capacidad-transporte(?a ?b)
-    (if (> ?a ?b) then
-      (return ?a)
+(deffunction ver-si-carga-mayor-que-capacidad-transporte(?cant ?cap)
+    (if (> ?cant ?cap) then
+      (return true)
   else
-      (return ?b)))
+      (return false)))
+
+(deffunction usar-paracaidas()
+     (printout t "Se puede usar paracaidas para dejar carga en destino" crlf))
 
 (deffunction iniciar ()
     (reset)
     (assert (fase preguntar-ubicacion-inicial))
     (run)
-    (facts))
+    (facts)
+    (exit))
 
 ; ******
 ; REGLAS
@@ -132,5 +134,14 @@
     (ubicacion {id == ?uId && estado == NO_DISPONIBLE})
     =>
     (printout t "Aeropuerto destino no disponible" crlf))
+
+
+
+(defrule print-all-transportes-mayor-igual-que-carga
+    (carga (cantidad ?cantidad))
+    (transporte (id ?id) (tipo ?tipo) (capacidad ?capacidad) (combustible ?compustible) (ubicacion ?ubicacion))
+    =>
+    (printout t ?id " es un " ?tipo " con capacidad maxima de: " ?capacidad
+              (if (>= ?cantidad ?cantidad) then " y si" else " y no") " puede llevar la carga" crlf))
 
 (iniciar)

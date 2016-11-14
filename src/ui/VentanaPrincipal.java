@@ -15,6 +15,8 @@ import jess.JessException;
  */
 public class VentanaPrincipal extends javax.swing.JFrame implements ActionListener {
 
+    private PanelCantidadCarga panelCantidadCarga                                                                                                                                                                                                                ;   
+    private PanelCarga panelCarga;
     private PanelUbicacion panelUbicacion;
     private PanelDestino panelDestino;
     private PanelInicio panelInicio;
@@ -53,6 +55,12 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
         panelDestino = new PanelDestino();
         panelDestino.addOnClickSiguienteEventListener(this);
         
+        panelCarga = new PanelCarga();
+        panelCarga.addOnClickSiguienteEventListener(this);
+        
+        panelCantidadCarga = new PanelCantidadCarga();
+        panelCantidadCarga.addOnClickSiguienteEventListener(this);
+        
         panelRespuesta = new PanelRespuesta();
 
         getContentPane().add(panelInicio);
@@ -81,6 +89,34 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
                 cambiarPanel(panelDestino);
             } else if (boton.getName().equals("botonDestinoSiguiente")) {
                 switch (panelDestino.getRespuesta()) {
+                    case 0:
+                        controladorMotorInferencia.evaluar("(ubicacion_destino (id bm_la_paz))");
+                        break;
+                    case 1:
+                        controladorMotorInferencia.evaluar("(ubicacion_destino (id bm_cbba))");
+                        break;
+                    case 2:
+                        controladorMotorInferencia.evaluar("(ubicacion_destino (id bm_santa_cruz))");
+                        
+                        break;
+                }
+                 cambiarPanel(panelCarga);
+            } else if (boton.getName().equals("botonCargaSiguiente")) {
+                switch (panelCarga.getRespuesta()) {
+                    case 0:
+                        controladorMotorInferencia.evaluar("(ubicacion_destino (id bm_la_paz))");
+                        break;
+                    case 1:
+                        controladorMotorInferencia.evaluar("(ubicacion_destino (id bm_cbba))");
+                        break;
+                    case 2:
+                        controladorMotorInferencia.evaluar("(ubicacion_destino (id bm_santa_cruz))");
+                        
+                        break;
+                }
+                cambiarPanel(panelCantidadCarga);
+            } else if (boton.getName().equals("botonCantidadCargaSiguiente")) {
+                switch (panelCantidadCarga.getRespuesta()) {
                     case 0:
                         controladorMotorInferencia.evaluar("(ubicacion_destino (id bm_la_paz))");
                         break;

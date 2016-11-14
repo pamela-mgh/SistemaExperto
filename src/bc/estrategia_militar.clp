@@ -54,14 +54,14 @@
 	(ruta (inicio bm_cbba) (fin bm_la_paz))
     (ruta (inicio bm_sucre) (fin bm_potosi) (estado COMPROMETIDO))
     (ruta (inicio bm_potosi) (fin bm_sucre))
-    (carga (tipo suministros) (cantidad 100))
-    (carga (tipo suministros) (cantidad 200))
-    (carga (tipo personal-militar) (cantidad 40)) 
-    (carga (tipo personal-militar) (cantidad 60)) 
-    (carga (tipo vehiculos) (cantidad 30))
+    ;(carga (tipo suministros) (cantidad 100))
+    ;(carga (tipo suministros) (cantidad 200))
+    ;(carga (tipo personal-militar) (cantidad 40)) 
+    ;(carga (tipo personal-militar) (cantidad 60)) 
+    ;(carga (tipo vehiculos) (cantidad 30))
 	(transporte (id A0X-1) (tipo avion) (capacidad 500) (combustible 100) (ubicacion bm_la_paz))
-	(transporte (id A0X-3) (tipo avion) (capacidad 200) (combustible 100))
-	(transporte (id A0X-5) (tipo helicoptero) (capacidad 100) (combustible 80))
+	(transporte (id A0X-3) (tipo avion) (capacidad 200) (combustible 100) (ubicacion bm_la_paz))
+	(transporte (id A0X-5) (tipo helicoptero) (capacidad 100) (combustible 80) (ubicacion bm_la_paz))
 )
 
 ; *********
@@ -134,6 +134,5 @@
     (ubicacion {id == ?uId && estado == NO_DISPONIBLE})
     =>
     (printout t "Aeropuerto destino no disponible" crlf))
-
 
 (iniciar)

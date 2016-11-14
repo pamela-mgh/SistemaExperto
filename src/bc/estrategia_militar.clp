@@ -143,11 +143,4 @@
     (printout t "Aeropuerto destino no disponible" crlf))
 
 
-
-(defrule print-all-transportes-mayor-igual-que-carga
-    (carga (cantidad ?cantidad))
-    (transporte (id ?id) (tipo ?tipo) (capacidad ?capacidad) (combustible ?compustible) (ubicacion ?ubicacion))
-    =>
-   (if (>= ?capacidad ?cantidad) then(printout t ?tipo " " ?id " puede llevar la carga" crlf)))
-    
 (iniciar)

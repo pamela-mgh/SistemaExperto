@@ -66,25 +66,30 @@
         (carga (tipo vehiculos) (cantidad 30))
 
     ;Transporte
-        (transporte (id A0X-1) (tipo avion) (capacidad 80) (combustible 100) (ubicacion bm_la_paz))
-        (transporte (id A0X-3) (tipo avion) (capacidad 100) (combustible 100))
+        (transporte (id A0X-1) (tipo avion) (capacidad 500) (combustible 100) (ubicacion bm_la_paz))
+        (transporte (id A0X-3) (tipo avion) (capacidad 200) (combustible 100))
+        (transporte (id A0X-5) (tipo helicoptero) (capacidad 100) (combustible 80))
 )
 
 ; *********
 ; FUNCIONES
 ; *********
 
-(deffunction ver-si-carga-mayor-que-capacidad-transporte(?a ?b)
-    (if (> ?a ?b) then
+(deffunction ver-si-carga-mayor-que-capacidad-transporte(?cant ?cap)
+    (if (> ?cant ?cap) then
       (return true)
   else
       (return false)))
+
+(deffunction usar-paracaidas()
+     (printout t "Se puede usar paracaidas para dejar carga en destino" crlf))
 
 (deffunction iniciar ()
     (reset)
     (assert (fase preguntar-ubicacion-inicial))
     (run)
-    (facts))
+    (facts)
+    (exit))
 
 ; ******
 ; REGLAS
@@ -136,5 +141,14 @@
     (ubicacion {id == ?uId && estado == NO_DISPONIBLE})
     =>
     (printout t "Aeropuerto destino no disponible" crlf))
+
+
+
+(defrule print-all-transportes-mayor-igual-que-carga
+    (carga (cantidad ?cantidad))
+    (transporte (id ?id) (tipo ?tipo) (capacidad ?capacidad) (combustible ?compustible) (ubicacion ?ubicacion))
+    =>
+    (printout t ?id " es un " ?tipo " con capacidad maxima de: " ?capacidad
+              (if (>= ?cantidad ?cantidad) then " y si" else " y no") " puede llevar la carga" crlf))
 
 (iniciar)

@@ -43,6 +43,12 @@
     (slot capacidad)
     (slot ubicacion))
 
+(deftemplate transporte-no-disponible
+    (slot id)
+    (slot tipo)
+    (slot capacidad)
+    (slot ubicacion))
+
 (deftemplate accion
     (slot texto (type STRING)))
 ; ********************
@@ -89,12 +95,19 @@
 
 ; REGLAS DE TRANSPORTE
 
-(defrule verificacion-disponibilidad-transporte
+(defrule si-capacidad-transporte-es-mayor-o-igual-a-cantidad-carga-entonces-transporte-disponible
     (carga (cantidad ?cantidad))
     (ubicacion-inicial (id ?ubicacionId))
     ?transporte <- (transporte {ubicacion == ?ubicacionId && capacidad >= ?cantidad} (id ?transporteId) (tipo ?tipo) (capacidad ?capacidad))
     =>
     (assert (transporte-disponible (id ?transporteId) (tipo ?tipo) (capacidad ?capacidad) (ubicacion ?ubicacionId))))
+
+(defrule si-capacidad-transporte-es-menor-a-cantidad-carga-entonces-transporte-no-disponible
+    (carga (cantidad ?cantidad))
+    (ubicacion-inicial (id ?ubicacionId))
+    ?transporte <- (transporte {ubicacion == ?ubicacionId && capacidad < ?cantidad} (id ?transporteId) (tipo ?tipo) (capacidad ?capacidad))
+    =>
+    (assert (transporte-no-disponible (id ?transporteId) (tipo ?tipo) (capacidad ?capacidad) (ubicacion ?ubicacionId))))
 
 ; REGLAS DE DESCARGA
 

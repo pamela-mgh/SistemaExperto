@@ -51,11 +51,15 @@ public class ControladorMotorInferencia {
         Iterator<Fact> it = motorInferencia.listFacts();
         while (it.hasNext()) {
             Fact hecho = it.next();
-            switch(hecho.getName()) {
+            String nombreHecho = hecho.getName();
+            switch(nombreHecho) {
                 case "MAIN::transporte-disponible":
                     String tipo = hecho.getSlotValue("tipo").toString();
                     String id = hecho.getSlotValue("id").toString();
                     plan.add("Usar el " + tipo + " " + id);
+                    break;
+                case "MAIN::transporte-no-disponible":
+                    plan.add("No he podido realizar un plan debido a que no existe transporte con capacidad<br>para la cantidad de carga introducida.");
                     break;
                 case "MAIN::accion":
                     String razon = hecho.getSlotValue("texto").toString();

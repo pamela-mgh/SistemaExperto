@@ -43,12 +43,6 @@
     (slot capacidad)
     (slot ubicacion))
 
-(deftemplate transporte-no-disponible
-    (slot id)
-    (slot tipo)
-    (slot capacidad)
-    (slot ubicacion))
-
 (deftemplate accion
     (slot texto (type STRING)))
 ; ********************
@@ -105,9 +99,9 @@
 (defrule si-capacidad-transporte-es-menor-a-cantidad-carga-entonces-transporte-no-disponible
     (carga (cantidad ?cantidad))
     (ubicacion-inicial (id ?ubicacionId))
-    ?transporte <- (transporte {ubicacion == ?ubicacionId && capacidad < ?cantidad} (id ?transporteId) (tipo ?tipo) (capacidad ?capacidad))
+    ?transporte <- (transporte {ubicacion == ?ubicacionId && capacidad < ?cantidad})
     =>
-    (assert (transporte-no-disponible (id ?transporteId) (tipo ?tipo) (capacidad ?capacidad) (ubicacion ?ubicacionId))))
+    (assert (transporte-no-disponible)))
 
 ; REGLAS DE DESCARGA
 
@@ -191,6 +185,5 @@
     (ubicacion {id == ?uId && estado == NO_DISPONIBLE && razon == "mal pistas de aterizaje"})
     =>
     (printout t "El destino no esta disponbible por " ?razon "." crlf))
-
 
 (reset)

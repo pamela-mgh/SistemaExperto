@@ -14,7 +14,6 @@
     (slot id)
     (slot nombre (type STRING))
     (slot estado (default DISPONIBLE)) ; DISPONIBLE | NO_DISPONIBLE
-    (slot visitado (default FALSE))
     (slot razon (type STRING)))
 
 (deftemplate ruta

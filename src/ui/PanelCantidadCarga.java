@@ -42,7 +42,7 @@ public class PanelCantidadCarga extends javax.swing.JPanel {
         labelPregunta.setText("¿Que cantidad de carga llevará?");
 
         botonCantidadCargaSiguiente.setText("Siguiente");
-        botonCantidadCargaSiguiente.setName("botonDestinoSiguiente"); // NOI18N
+        botonCantidadCargaSiguiente.setName("botonCantidadCargaSiguiente"); // NOI18N
         botonCantidadCargaSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonCantidadCargaSiguienteActionPerformed(evt);

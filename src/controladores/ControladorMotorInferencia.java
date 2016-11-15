@@ -1,7 +1,6 @@
 package controladores;
 
 import java.util.Iterator;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jess.Fact;
@@ -16,11 +15,10 @@ public class ControladorMotorInferencia {
     
     public ControladorMotorInferencia() throws JessException {
         motorInferencia = new Rete();
-        motorInferencia.reset();
         motorInferencia.batch("bc/estrategia_militar.clp");
     }
     
-    public void evaluar(String hecho) {
+    public void insertarHecho(String hecho) {
         try {
             motorInferencia.assertString(hecho);
         } catch (JessException ex) {

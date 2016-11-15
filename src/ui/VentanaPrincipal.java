@@ -15,13 +15,16 @@ import jess.JessException;
  */
 public class VentanaPrincipal extends javax.swing.JFrame implements ActionListener {
 
-    private PanelCantidadCarga panelCantidadCarga                                                                                                                                                                                                                ;   
-    private PanelCarga panelCarga;
+    private PanelCantidadCarga panelCantidadCarga;
+    private PanelTipoCarga panelCarga;
     private PanelUbicacion panelUbicacion;
     private PanelDestino panelDestino;
     private PanelInicio panelInicio;
     private PanelRespuesta panelRespuesta;
     private ControladorMotorInferencia controladorMotorInferencia;
+
+    private String tipoCarga;
+    private int cantidadCarga;
 
     public VentanaPrincipal(ControladorMotorInferencia controladorMotorInferencia) {
         this.controladorMotorInferencia = controladorMotorInferencia;
@@ -54,13 +57,13 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
 
         panelDestino = new PanelDestino();
         panelDestino.addOnClickSiguienteEventListener(this);
-        
-        panelCarga = new PanelCarga();
+
+        panelCarga = new PanelTipoCarga();
         panelCarga.addOnClickSiguienteEventListener(this);
-        
+
         panelCantidadCarga = new PanelCantidadCarga();
         panelCantidadCarga.addOnClickSiguienteEventListener(this);
-        
+
         panelRespuesta = new PanelRespuesta();
 
         getContentPane().add(panelInicio);
@@ -77,64 +80,53 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
             if (boton.getName().equals("botonUbicacionSiguiente")) {
                 switch (panelUbicacion.getRespuesta()) {
                     case 0:
-                        controladorMotorInferencia.evaluar("(ubicacion_inicial (id bm_la_paz))");
+                        controladorMotorInferencia.insertarHecho("(ubicacion-inicial (id bm_la_paz))");
                         break;
                     case 1:
-                        controladorMotorInferencia.evaluar("(ubicacion_inicial (id bm_cbba))");
+                        controladorMotorInferencia.insertarHecho("(ubicacion-inicial (id bm_cbba))");
                         break;
                     case 2:
-                        controladorMotorInferencia.evaluar("(ubicacion_inicial (id bm_santa_cruz))");
+                        controladorMotorInferencia.insertarHecho("(ubicacion-inicial (id bm_santa_cruz))");
                         break;
                 }
                 cambiarPanel(panelDestino);
             } else if (boton.getName().equals("botonDestinoSiguiente")) {
                 switch (panelDestino.getRespuesta()) {
                     case 0:
-                        controladorMotorInferencia.evaluar("(ubicacion_destino (id bm_la_paz))");
+                        controladorMotorInferencia.insertarHecho("(ubicacion-destino (id bm_la_paz))");
+                        cambiarPanel(panelCarga);
                         break;
                     case 1:
-                        controladorMotorInferencia.evaluar("(ubicacion_destino (id bm_cbba))");
+                        controladorMotorInferencia.insertarHecho("(ubicacion-destino (id bm_cbba))");
+                        cambiarPanel(panelCarga);
                         break;
                     case 2:
-                        controladorMotorInferencia.evaluar("(ubicacion_destino (id bm_santa_cruz))");
-                        
+                        controladorMotorInferencia.insertarHecho("(ubicacion-destino (id bm_santa_cruz))");
+                        cambiarPanel(panelCarga);
                         break;
                 }
-                 cambiarPanel(panelCarga);
-            } else if (boton.getName().equals("botonCargaSiguiente")) {
+            } else if (boton.getName().equals("botonTipoCargaSiguiente")) {
                 switch (panelCarga.getRespuesta()) {
                     case 0:
-                        controladorMotorInferencia.evaluar("(ubicacion_destino (id bm_la_paz))");
+                        this.tipoCarga = "personal-militar";
+                        cambiarPanel(panelCantidadCarga);
                         break;
                     case 1:
-                        controladorMotorInferencia.evaluar("(ubicacion_destino (id bm_cbba))");
-                        break;
-                    case 2:
-                        controladorMotorInferencia.evaluar("(ubicacion_destino (id bm_santa_cruz))");
-                        
+                        this.tipoCarga = "suministros";
+                        cambiarPanel(panelCantidadCarga);
                         break;
                 }
-                cambiarPanel(panelCantidadCarga);
             } else if (boton.getName().equals("botonCantidadCargaSiguiente")) {
-                switch (panelCantidadCarga.getRespuesta()) {
-                    case 0:
-                        controladorMotorInferencia.evaluar("(ubicacion_destino (id bm_la_paz))");
-                        break;
-                    case 1:
-                        controladorMotorInferencia.evaluar("(ubicacion_destino (id bm_cbba))");
-                        break;
-                    case 2:
-                        controladorMotorInferencia.evaluar("(ubicacion_destino (id bm_santa_cruz))");
-                        
-                        break;
-                }
-                cambiarPanel(panelRespuesta);
-                try {
-                    controladorMotorInferencia.ejecutar();
-                    controladorMotorInferencia.getCamino();
-                    panelRespuesta.mostrarCamino(controladorMotorInferencia.getCamino());
-                } catch (JessException ex) {
-                    Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                int cantidad = panelCantidadCarga.getRespuesta();
+                if (cantidad > 0) {
+                    this.cantidadCarga = cantidad;
+                    String hecho = "(carga (tipo " + this.tipoCarga + ") (cantidad " + this.cantidadCarga + "))";
+                    controladorMotorInferencia.insertarHecho(hecho);
+                    try {
+                        controladorMotorInferencia.ejecutar();
+                    } catch (JessException ex) {
+                        Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
         }

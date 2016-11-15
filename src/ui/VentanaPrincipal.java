@@ -89,6 +89,12 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
                     case 2:
                         controladorMotorInferencia.insertarHecho("(ubicacion-inicial (id bm_santa_cruz))");
                         break;
+                    case 3:
+                        controladorMotorInferencia.insertarHecho("(ubicacion-inicial (id bm_sucre))");
+                        break;
+                    case 4:
+                        controladorMotorInferencia.insertarHecho("(ubicacion-inicial (id bm_potosi))");
+                        break;
                 }
                 cambiarPanel(panelDestino);
             } else if (boton.getName().equals("botonDestinoSiguiente")) {
@@ -103,6 +109,14 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
                         break;
                     case 2:
                         controladorMotorInferencia.insertarHecho("(ubicacion-destino (id bm_santa_cruz))");
+                        cambiarPanel(panelCarga);
+                        break;
+                    case 3:
+                        controladorMotorInferencia.insertarHecho("(ubicacion-destino (id bm_sucre))");
+                        cambiarPanel(panelCarga);
+                        break;
+                    case 4:
+                        controladorMotorInferencia.insertarHecho("(ubicacion-destino (id bm_potosi))");
                         cambiarPanel(panelCarga);
                         break;
                 }

@@ -27,37 +27,34 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="botonEmpezar" min="-2" pref="83" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="labelDescripcionGeneral" min="-2" pref="560" max="-2" attributes="0"/>
-                          <Component id="labelTitulo" min="-2" max="-2" attributes="0"/>
-                          <Component id="labelFotoInicio" min="-2" pref="562" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
+                  <Component id="botonEmpezar" min="-2" pref="83" max="-2" attributes="0"/>
+                  <Component id="labelFotoInicio" min="-2" pref="562" max="-2" attributes="0"/>
+                  <Component id="labelDescripcionGeneral" min="-2" pref="560" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="0" pref="127" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="117" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+              <Component id="labelTitulo" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="51" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
               <Component id="labelTitulo" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="labelDescripcionGeneral" pref="69" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="labelDescripcionGeneral" min="-2" pref="32" max="-2" attributes="0"/>
-              <EmptySpace pref="44" max="32767" attributes="0"/>
               <Component id="labelFotoInicio" min="-2" pref="267" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
               <Component id="botonEmpezar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -69,12 +66,12 @@
           <Color blue="cc" green="cc" red="cc" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="24" style="0"/>
+          <Font name="Tahoma" size="24" style="1"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Bienvenido al Sistema Experto de Planificacion Aerea"/>
+        <Property name="text" type="java.lang.String" value="Bienvenido al Sistema Experto de Planificacion Aerea Militar"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="labelDescripcionGeneral">
@@ -82,7 +79,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="cc" green="cc" red="cc" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="El sistema Experto busca un plan de transporte aereo dado una ubicacion inicial y un destino "/>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;El objetivo de este Sistema Experto es encontrar un plan de transporte aereo militar dado una ubicacion inicial ,un destino,tipo de carga que desea llevar, como tambien la cantidad de esta.Al introducir estos datos nos dara como resultado los posibles pasos a seguir del plan encontrado.  &lt;/html&gt;"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="botonEmpezar">

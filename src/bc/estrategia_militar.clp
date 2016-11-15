@@ -1,7 +1,3 @@
-; ******************
-; VARIABLES GLOBALES
-; ******************
-
 ; ********************
 ; PLANTILLAS DE HECHOS
 ; ********************
@@ -66,18 +62,11 @@
 	(transporte (id A0X-3) (tipo avion) (capacidad 200) (combustible 100) (ubicacion bm_cbba))
 	(transporte (id A0X-5) (tipo helicoptero) (capacidad 100) (combustible 80) (ubicacion bm_santa_cruz)))
 
-; *********
-; FUNCIONES
-; *********
-
-(deffunction iniciar ()
-    (reset)
-    (assert (fase preguntar-ubicacion-inicial))
-    (run))
-
 ; ******
 ; REGLAS
 ; ******
+
+; REGLAS DE FASES
 
 (defrule si-la-fase-es-preguntar-ubicacion-inicial
     ?fase <- (fase preguntar-ubicacion-inicial)
@@ -112,15 +101,15 @@
     (retract ?fase)
     (assert (fase verificar-disponibilidad-transporte)))
 
-(defrule si-la-fase-es-verificar-disponibilidad-transporte
-    ?fase <- (fase verificar-disponibilidad-transporte)
+; REGLAS DE TRANSPORTE
+
+(defrule verificacion-disponibilidad-transporte
     (carga (cantidad ?cantidad))
     (ubicacion-inicial (id ?ubicacionId))
     ?transporte <- (transporte {ubicacion == ?ubicacionId && capacidad >= ?cantidad} (id ?transporteId))
     =>
     (printout t "Existe transporte disponible" crlf)
-    (assert (transporte-disponible (id ?transporteId)))
-    (retract ?fase))
+    (assert (transporte-disponible (id ?transporteId))))
 
 ; REGLAS DE TIPO DE AVION
 (defrule tipo-avion
@@ -197,4 +186,4 @@
     =>
     (printout t "Aeropuerto destino no disponible para aterrizar por " ?razon "." crlf))
 
-(iniciar)
+(reset)

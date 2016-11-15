@@ -41,8 +41,6 @@
     (slot id)
     (slot tipo)
     (slot capacidad)
-    (slot distancia-maxima)
-    (slot combustible)
     (slot ubicacion))
 
 (deftemplate accion
@@ -57,7 +55,6 @@
 	(ubicacion (id bm_santa_cruz) (nombre "Base Militar Santa Cruz"))
 	(ubicacion (id bm_sucre) (nombre "Base Militar Sucre"))
         (ubicacion (id bm_potosi) (nombre "Base Militar Potosi"))
-<<<<<<< HEAD
         (ruta (inicio bm_santa_cruz) (fin bm_la_paz) (distancia 2000))
 	(ruta (inicio bm_la_paz) (fin bm_santa_cruz) (estado COMPROMETIDO) (distancia 200))
 	(ruta (inicio bm_santa_cruz) (fin bm_cbba) (distancia 1000))
@@ -68,9 +65,7 @@
         (ruta (inicio bm_potosi) (fin bm_sucre)(distancia 4500))
 	(transporte (id A0X-1) (tipo avion) (capacidad 500) (combustible 500) (ubicacion bm_la_paz))
 	(transporte (id A0X-3) (tipo avion) (capacidad 200) (combustible 500) (ubicacion bm_cbba))
-	(transporte (id A0X-5) (tipo helicoptero) (capacidad 100) (combustible 500) (ubicacion bm_santa_cruz)))
-=======
-
+	(transporte (id A0X-5) (tipo helicoptero) (capacidad 100) (combustible 500) (ubicacion bm_santa_cruz))
         (ruta (inicio bm_santa_cruz) (fin bm_la_paz))
 	(ruta (inicio bm_santa_cruz) (fin bm_cbba))
         (ruta (inicio bm_santa_cruz) (fin bm_sucre))
@@ -91,13 +86,11 @@
         (ruta (inicio bm_potosi) (fin bm_la_paz))
         (ruta (inicio bm_potosi) (fin bm_cbba))
         (ruta (inicio bm_potosi) (fin bm_santa_cruz))
-
 	(transporte (id A0X-1) (tipo avion) (capacidad 500) (combustible 100) (ubicacion bm_la_paz))
 	(transporte (id A0X-3) (tipo avion) (capacidad 200) (combustible 100) (ubicacion bm_cbba))
 	(transporte (id H0X-2) (tipo helicoptero) (capacidad 100) (combustible 80) (ubicacion bm_santa_cruz))
 	(transporte (id A0X-2) (tipo avion) (capacidad 200) (combustible 100) (ubicacion bm_sucre))
 	(transporte (id H0X-4) (tipo helicoptero) (capacidad 100) (combustible 80) (ubicacion bm_potosi)))
->>>>>>> 021e59874f6e7243fb957fca43a911907fe008e2
 
 ; ******
 ; REGLAS
@@ -201,6 +194,8 @@
     (ubicacion {id == ?uId && estado == NO_DISPONIBLE && razon == "mal pistas de aterizaje"})
     =>
     (printout t "El destino no esta disponbible por " ?razon "." crlf))
+
+
 ;--------------------------------------------------
 (deffunction MaxDistancia (?a ?b)
       (return * ?a ?b))
@@ -215,3 +210,5 @@
     ?transporte-disponible <- (transporte-disponible (id ?transporteId) (combustible ?combustible))
     =>
     (modify ?transporte-disponible (distancia-maxima(MaxDistancia(?combustible ?*kmporltAVION*)))))
+
+;NO CORRER PORQUE NECESITA SLOT DE COMBUSTIBLE EN TRANSPORTE-DISPONIBLE

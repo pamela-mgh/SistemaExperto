@@ -53,11 +53,13 @@ public class ControladorMotorInferencia {
             Fact hecho = it.next();
             switch(hecho.getName()) {
                 case "MAIN::transporte-disponible":
-                    String accion = "";
                     String tipo = hecho.getSlotValue("tipo").toString();
                     String id = hecho.getSlotValue("id").toString();
-                    accion += "Usar el " + tipo + " " + id;
-                    plan.add(accion);
+                    plan.add("Usar el " + tipo + " " + id);
+                    break;
+                case "MAIN::accion":
+                    String razon = hecho.getSlotValue("texto").toString();
+                    plan.add(razon.substring(1, razon.length()-1));
                     break;
             }
         }

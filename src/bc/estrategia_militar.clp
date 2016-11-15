@@ -43,6 +43,8 @@
     (slot capacidad)
     (slot ubicacion))
 
+(deftemplate accion
+    (slot texto (type STRING)))
 ; ********************
 ; DEFINICION DE HECHOS
 ; ********************
@@ -78,7 +80,6 @@
     =>
     (assert (transporte-disponible (id ?transporteId) (tipo ?tipo) (capacidad ?capacidad) (ubicacion ?ubicacionId))))
 
-
 ; REGLAS DE DESCARGA
 
 (defrule personal-militar-desciende-en-paracaidas
@@ -87,7 +88,7 @@
     (transporte-disponible {tipo == avion})
     (carga (tipo personal-militar))
     =>
-    (assert (personal-militar-desciende-en-paracaidas)))
+    (assert (accion (texto "El personal militar debe descender en paracaidas.") )))
 
 (defrule soltar-carga-en-paracaidas
     (ubicacion-destino (id ?uId))

@@ -55,9 +55,17 @@ public class ControladorMotorInferencia {
             String nombreHecho = hecho.getName();
             System.out.println(hecho);
             switch(nombreHecho) {
+                case "MAIN::ubicacion-inicial-igual-a-destino":
+                    plan.add("No es necesario planificar un vuelo ya que la ubicacion inicial y final son iguales.");
+                    break;
                 case "MAIN::aeropuerto-inicial-no-disponible":
-                    String razon = hecho.getSlotValue("razon").toString();
-                    plan.add("El aeropuerto inicial no esta disponible por " + razon.substring(1, razon.length()-1));
+                    String razonInicio = hecho.getSlotValue("razon").toString();
+                    plan.add("El aeropuerto inicial no esta disponible por " + razonInicio.substring(1, razonInicio.length()-1));
+                    break;
+                case "MAIN::aeropuerto-destino-no-disponible":
+                    String razonDestino = hecho.getSlotValue("razon").toString();
+                    System.out.println(razonDestino);
+                    plan.add("El aeropuerto destino no esta disponible por " + razonDestino.substring(1, razonDestino.length()-1));
                     break;
                 case "MAIN::transporte-disponible":
                     String tipo = hecho.getSlotValue("tipo").toString();
@@ -65,7 +73,7 @@ public class ControladorMotorInferencia {
                     plan.add("Usar el " + tipo + " " + id + ".");
                     break;
                 case "MAIN::transporte-no-disponible":
-                    plan.add("No he podido realizar un plan debido a que no existe transporte con capacidad<br>para la cantidad de carga introducida.");
+                    plan.add("No he podido realizar un plan debido a que no existe transporte con capacidad para la cantidad de carga introducida.");
                     break;
                 case "MAIN::accion":
                     String texto = hecho.getSlotValue("texto").toString();

@@ -58,6 +58,9 @@
 (deftemplate aeropuerto-inicial-no-disponible
     (slot razon (type STRING)))
 
+(deftemplate aeropuerto-destino-no-disponible
+    (slot razon (type STRING)))
+
 ; ********************
 ; DEFINICION DE HECHOS
 ; ********************
@@ -191,7 +194,20 @@
 
 ; REGLAS DE DISPONIBILIDAD DE AEROPUERTO
 
+(defrule ubicacion-inicio-y-destino-distintos
+    (ubicacion-inicial (id ?inicioId))
+    (ubicacion-destino {id != ?inicioId})
+    =>
+    (assert (ubicacion-inicio-y-destino-distintos)))
+
+(defrule ubicacion-inicio-igual-a-destino
+    (ubicacion-inicial (id ?inicioId))
+    (ubicacion-destino {id == ?inicioId})
+    =>
+    (assert (ubicacion-inicial-igual-a-destino)))
+
 (defrule aeropuerto-inicial-disponible
+    (ubicacion-inicio-y-destino-distintos)
     (ubicacion-inicial (id ?uId))
     (ubicacion {id == ?uId && estado == DISPONIBLE})
     =>
@@ -200,6 +216,7 @@
 
 (defrule aeropuerto-inicial-no-disponible
     "Verifica si el aeropuerto inicial no esta disponible"
+    (ubicacion-inicio-y-destino-distintos)
     (ubicacion-inicial (id ?uId))
     (ubicacion {id == ?uId && estado == NO_DISPONIBLE} (razon ?razon))
     =>
@@ -207,24 +224,28 @@
 
 (defrule aeropuerto-destino-no-disponible
     "Verifica si el aeropuerto destino no esta disponible"
+    (ubicacion-inicio-y-destino-distintos)
     (ubicacion-destino (id ?uId))
     (ubicacion {id == ?uId && estado == NO_DISPONIBLE} (razon ?razon))
     =>
-    (assert (aeropuerto-destino-no-disponible)))
+    (assert (aeropuerto-destino-no-disponible (razon ?razon))))
 
 (defrule aeropuerto-destino-no-disponible-por-cuasas-naturales
+    (ubicacion-inicio-y-destino-distintos)
     (ubicacion-destino (id ?uId))
     (ubicacion {id == ?uId && estado == NO_DISPONIBLE && razon == "causas naturales"})
     =>
     (assert (accion (texto "El destino no esta disponbible por causas naturales."))))
 
 (defrule aeropuerto-destino-no-disponible-por-bombardeo
+    (ubicacion-inicio-y-destino-distintos)
     (ubicacion-destino (id ?uId))
     (ubicacion {id == ?uId && estado == NO_DISPONIBLE && razon == "bombardeo"})
     =>
     (assert (accion (texto "El destino no esta disponbible por bombardeo."))))
 
 (defrule aeropuerto-destino-no-disponible-por-mal-pistas
+    (ubicacion-inicio-y-destino-distintos)
     (ubicacion-destino (id ?uId))
     (ubicacion {id == ?uId && estado == NO_DISPONIBLE && razon == "pista en mal estado"})
     =>

@@ -41,7 +41,9 @@
     (slot id)
     (slot tipo)
     (slot capacidad)
-    (slot ubicacion))
+    (slot ubicacion)
+    (slot combustible)
+    (slot distancia-maxima))
 
 (deftemplate accion
     (slot texto (type STRING)))
@@ -55,17 +57,6 @@
 	(ubicacion (id bm_santa_cruz) (nombre "Base Militar Santa Cruz"))
 	(ubicacion (id bm_sucre) (nombre "Base Militar Sucre"))
         (ubicacion (id bm_potosi) (nombre "Base Militar Potosi"))
-        (ruta (inicio bm_santa_cruz) (fin bm_la_paz) (distancia 2000))
-	(ruta (inicio bm_la_paz) (fin bm_santa_cruz) (estado COMPROMETIDO) (distancia 200))
-	(ruta (inicio bm_santa_cruz) (fin bm_cbba) (distancia 1000))
-	(ruta (inicio bm_cbba) (fin bm_santa_cruz) (distancia 1000))
-	(ruta (inicio bm_la_paz) (fin bm_cbba)(distancia 3000))
-	(ruta (inicio bm_cbba) (fin bm_la_paz)(distancia 3000))
-        (ruta (inicio bm_sucre) (fin bm_potosi) (estado COMPROMETIDO)(distancia 4500))
-        (ruta (inicio bm_potosi) (fin bm_sucre)(distancia 4500))
-	(transporte (id A0X-1) (tipo avion) (capacidad 500) (combustible 500) (ubicacion bm_la_paz))
-	(transporte (id A0X-3) (tipo avion) (capacidad 200) (combustible 500) (ubicacion bm_cbba))
-	(transporte (id A0X-5) (tipo helicoptero) (capacidad 100) (combustible 500) (ubicacion bm_santa_cruz))
         (ruta (inicio bm_santa_cruz) (fin bm_la_paz))
 	(ruta (inicio bm_santa_cruz) (fin bm_cbba))
         (ruta (inicio bm_santa_cruz) (fin bm_sucre))
@@ -101,9 +92,9 @@
 (defrule si-capacidad-transporte-es-mayor-o-igual-a-cantidad-carga-entonces-transporte-disponible
     (carga (cantidad ?cantidad))
     (ubicacion-inicial (id ?ubicacionId))
-    ?transporte <- (transporte {ubicacion == ?ubicacionId && capacidad >= ?cantidad} (id ?transporteId) (tipo ?tipo) (capacidad ?capacidad))
+    ?transporte <- (transporte {ubicacion == ?ubicacionId && capacidad >= ?cantidad} (id ?transporteId) (tipo ?tipo) (capacidad ?capacidad) (combustible ?combustible))
     =>
-    (assert (transporte-disponible (id ?transporteId) (tipo ?tipo) (capacidad ?capacidad) (ubicacion ?ubicacionId))))
+    (assert (transporte-disponible (id ?transporteId) (tipo ?tipo) (capacidad ?capacidad) (ubicacion ?ubicacionId) (combustible ?combustible))))
 
 (defrule si-capacidad-transporte-es-menor-a-cantidad-carga-entonces-transporte-no-disponible
     (carga (cantidad ?cantidad))
@@ -197,8 +188,8 @@
 
 
 ;--------------------------------------------------
-(deffunction MaxDistancia (?a ?b)
-      (return * ?a ?b))
+(deffunction MaxDistancia (?combustible)
+      (* ?*kmporltAVION* ?combustible))
 
 (defglobal ?*kmporltAVION* = 100)
 (defglobal ?*kmporltHELICPOTERO* = 50)
@@ -209,6 +200,4 @@
     (ruta {inicio == ?idIni && fin == ?idDes} (distancia ?distanciaRuta))
     ?transporte-disponible <- (transporte-disponible (id ?transporteId) (combustible ?combustible))
     =>
-    (modify ?transporte-disponible (distancia-maxima(MaxDistancia(?combustible ?*kmporltAVION*)))))
-
-;NO CORRER PORQUE NECESITA SLOT DE COMBUSTIBLE EN TRANSPORTE-DISPONIBLE
+    (modify ?transporte-disponible (distancia-maxima (MaxDistancia ?combustible))))

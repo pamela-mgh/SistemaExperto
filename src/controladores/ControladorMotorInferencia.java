@@ -18,6 +18,7 @@ public class ControladorMotorInferencia {
     public ControladorMotorInferencia() throws JessException {
         motorInferencia = new Rete();
         motorInferencia.batch("bc/estrategia_militar.clp");
+        motorInferencia.reset();
     }
     
     public void insertarHecho(String hecho) {
@@ -52,6 +53,7 @@ public class ControladorMotorInferencia {
         while (it.hasNext()) {
             Fact hecho = it.next();
             String nombreHecho = hecho.getName();
+            System.out.println(hecho);
             switch(nombreHecho) {
                 case "MAIN::transporte-disponible":
                     String tipo = hecho.getSlotValue("tipo").toString();

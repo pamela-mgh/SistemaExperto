@@ -120,6 +120,15 @@
     =>
     (assert (accion (texto "Aterrizar el helicoptero normalmente"))))
 
+(defrule aterrizar-en-ubicacion-cercana-para-recargar-combustible
+    (ubicacion-destino (id ?uId))
+    (ubicacion {id == ?uId && estado == NO_DISPONIBLE && razon == "bajo en combustible"})
+    (transporte-disponible (id ?transporteId))
+    (transporte {id == ?transporteId && tipo == helicoptero})
+    =>
+    (printout t "Aterrizar en punto cercano para recargar combustible" crlf)
+    (assert (aterrizar-en-ubicacion-cercana-para-recargar-combustible)))
+
 ; REGLAS DE DISPONIBILIDAD DE AEROPUERTO
 
 (defrule aeropuerto-inicial-no-disponible
@@ -135,4 +144,24 @@
     (ubicacion {id == ?uId && estado == NO_DISPONIBLE} (razon ?razon))
     =>
     (assert (aeropuerto-destino-no-disponible)))
+
+(defrule aeropuerto-destino-no-disponible-por-cuasas-naturales
+    (ubicacion-destino (id ?uId))
+    (ubicacion {id == ?uId && estado == NO_DISPONIBLE && razon == "cuasas naturales"})
+    =>
+    (printout t "El destino no esta disponbible por " ?razon "." crlf))
+
+(defrule aeropuerto-destino-no-disponible-por-bombardeo
+    (ubicacion-destino (id ?uId))
+    (ubicacion {id == ?uId && estado == NO_DISPONIBLE && razon == "bombardeo"})
+    =>
+    (printout t "El destino no esta disponbible por " ?razon "." crlf))
+
+(defrule aeropuerto-destino-no-disponible-por-mal-pistas
+    (ubicacion-destino (id ?uId))
+    (ubicacion {id == ?uId && estado == NO_DISPONIBLE && razon == "mal pistas de aterizaje"})
+    =>
+    (printout t "El destino no esta disponbible por " ?razon "." crlf))
+
+
 (reset)

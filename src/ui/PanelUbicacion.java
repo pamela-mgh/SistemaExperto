@@ -30,9 +30,11 @@ public class PanelUbicacion extends javax.swing.JPanel {
     private void initComponents() {
 
         labelPregunta = new javax.swing.JLabel();
-        comboBoxRespuesta = new javax.swing.JComboBox<String>();
+        comboBoxRespuesta = new javax.swing.JComboBox<>();
         botonSiguiente = new javax.swing.JButton();
         ubicacionImagen = new javax.swing.JLabel();
+        labelInformacion = new javax.swing.JLabel();
+        labelTitulo = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(102, 102, 102));
         setMinimumSize(new java.awt.Dimension(800, 600));
@@ -43,7 +45,7 @@ public class PanelUbicacion extends javax.swing.JPanel {
         labelPregunta.setForeground(new java.awt.Color(255, 255, 255));
         labelPregunta.setText("Donde se ubica actualmente?");
 
-        comboBoxRespuesta.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Base Militar La Paz", "Base Militar Cochabamba", "Base Militar Santa Cruz", "Base Militar Sucre", "Base Militar Potosi" }));
+        comboBoxRespuesta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Base Militar La Paz", "Base Militar Cochabamba", "Base Militar Santa Cruz", "Base Militar Sucre", "Base Militar Potosi" }));
 
         botonSiguiente.setText("Siguiente");
         botonSiguiente.setName("botonUbicacionSiguiente"); // NOI18N
@@ -55,36 +57,54 @@ public class PanelUbicacion extends javax.swing.JPanel {
 
         ubicacionImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/ubicacion.jpg"))); // NOI18N
 
+        labelInformacion.setText("<html>¡Informacion!<br><br>Este paso es necesario para saber la ubicacion inicial del vuelo, con el proposito de vericar si esa ubicacion esta disponible. </html>");
+
+        labelTitulo.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        labelTitulo.setForeground(new java.awt.Color(255, 255, 255));
+        labelTitulo.setText("Planificacion Aerea Militar");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(62, Short.MAX_VALUE)
+                .addContainerGap(30, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(botonSiguiente)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(labelPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboBoxRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(labelPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(comboBoxRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(26, 26, 26))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(labelTitulo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(labelInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)))
                         .addComponent(ubicacionImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(60, 60, 60))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(154, 154, 154)
+                .addGap(38, 38, 38)
+                .addComponent(labelTitulo)
+                .addGap(100, 100, 100)
                 .addComponent(labelPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addComponent(comboBoxRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(labelInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(168, Short.MAX_VALUE)
-                .addComponent(ubicacionImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(71, 71, 71)
+                .addComponent(ubicacionImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
                 .addComponent(botonSiguiente)
-                .addGap(80, 80, 80))
+                .addGap(68, 68, 68))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -99,7 +119,9 @@ public class PanelUbicacion extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonSiguiente;
     private javax.swing.JComboBox<String> comboBoxRespuesta;
+    private javax.swing.JLabel labelInformacion;
     private javax.swing.JLabel labelPregunta;
+    private javax.swing.JLabel labelTitulo;
     private javax.swing.JLabel ubicacionImagen;
     // End of variables declaration//GEN-END:variables
 

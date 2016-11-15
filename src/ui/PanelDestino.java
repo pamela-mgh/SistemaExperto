@@ -30,9 +30,11 @@ public class PanelDestino extends javax.swing.JPanel {
     private void initComponents() {
 
         labelPregunta = new javax.swing.JLabel();
-        comboBoxRespuesta = new javax.swing.JComboBox<String>();
+        comboBoxRespuesta = new javax.swing.JComboBox<>();
         botonSiguiente = new javax.swing.JButton();
         imagenDestino = new javax.swing.JLabel();
+        labelInformacion = new javax.swing.JLabel();
+        labelTitulo = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(102, 102, 102));
         setMinimumSize(new java.awt.Dimension(800, 600));
@@ -42,7 +44,7 @@ public class PanelDestino extends javax.swing.JPanel {
         labelPregunta.setForeground(new java.awt.Color(255, 255, 255));
         labelPregunta.setText("Cual es el destino al que quiere ir?");
 
-        comboBoxRespuesta.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Base Militar La Paz", "Base Militar Cochabamba", "Base Militar Santa Cruz", "Base Militar Sucre", "Base Militar Potosi" }));
+        comboBoxRespuesta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Base Militar La Paz", "Base Militar Cochabamba", "Base Militar Santa Cruz", "Base Militar Sucre", "Base Militar Potosi" }));
         comboBoxRespuesta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBoxRespuestaActionPerformed(evt);
@@ -55,6 +57,12 @@ public class PanelDestino extends javax.swing.JPanel {
         imagenDestino.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/destino.jpg"))); // NOI18N
         imagenDestino.setText("jLabel1");
 
+        labelInformacion.setText("<html>¡Informacion!<br><br>Este paso es necesario para saber si el destino se encuentra disponible. </html>");
+
+        labelTitulo.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        labelTitulo.setForeground(new java.awt.Color(255, 255, 255));
+        labelTitulo.setText("Planificacion Aerea Militar");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -66,7 +74,9 @@ public class PanelDestino extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboBoxRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(comboBoxRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelTitulo))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(imagenDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(56, 56, 56))
@@ -74,16 +84,20 @@ public class PanelDestino extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(166, 166, 166)
+                .addGap(56, 56, 56)
+                .addComponent(labelTitulo)
+                .addGap(81, 81, 81)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(labelPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(37, 37, 37)
-                        .addComponent(comboBoxRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(imagenDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                        .addComponent(comboBoxRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(labelInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(imagenDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(61, 61, 61)
                 .addComponent(botonSiguiente)
-                .addGap(88, 88, 88))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -96,7 +110,9 @@ public class PanelDestino extends javax.swing.JPanel {
     private javax.swing.JButton botonSiguiente;
     private javax.swing.JComboBox<String> comboBoxRespuesta;
     private javax.swing.JLabel imagenDestino;
+    private javax.swing.JLabel labelInformacion;
     private javax.swing.JLabel labelPregunta;
+    private javax.swing.JLabel labelTitulo;
     // End of variables declaration//GEN-END:variables
     public int getRespuesta() {
         return comboBoxRespuesta.getSelectedIndex();

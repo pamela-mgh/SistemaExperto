@@ -32,6 +32,9 @@ public class PanelCantidadCarga extends javax.swing.JPanel {
         labelPregunta = new javax.swing.JLabel();
         botonCantidadCargaSiguiente = new javax.swing.JButton();
         textoCantidadCarga = new javax.swing.JTextField();
+        imagenCantidad = new javax.swing.JLabel();
+        labelTitulo = new javax.swing.JLabel();
+        labelInformacion = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(102, 102, 102));
         setMinimumSize(new java.awt.Dimension(800, 600));
@@ -49,50 +52,78 @@ public class PanelCantidadCarga extends javax.swing.JPanel {
             }
         });
 
+        textoCantidadCarga.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textoCantidadCargaActionPerformed(evt);
+            }
+        });
+
+        imagenCantidad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/cantidad.jpg"))); // NOI18N
+        imagenCantidad.setText("jLabel1");
+
+        labelTitulo.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        labelTitulo.setForeground(new java.awt.Color(255, 255, 255));
+        labelTitulo.setText("Planificacion Aerea Militar");
+
+        labelInformacion.setText("<html>¡Informacion!<br><br>Este paso es necesario para calcular que tipo de trasporte es adecuado para esa cantidad de carga. </html>");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(textoCantidadCarga, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(469, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(botonCantidadCargaSiguiente)
-                .addGap(66, 66, 66))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(51, 51, 51)
-                    .addComponent(labelPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(422, Short.MAX_VALUE)))
+                .addContainerGap(40, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(botonCantidadCargaSiguiente)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(labelTitulo)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(labelPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(textoCantidadCarga, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(labelInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(34, 34, 34)
+                            .addComponent(imagenCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(39, 39, 39))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(144, 144, 144)
-                .addComponent(textoCantidadCarga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 355, Short.MAX_VALUE)
-                .addComponent(botonCantidadCargaSiguiente)
-                .addGap(58, 58, 58))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(81, 81, 81)
-                    .addComponent(labelPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(485, Short.MAX_VALUE)))
+                .addContainerGap(125, Short.MAX_VALUE)
+                .addComponent(labelTitulo)
+                .addGap(90, 90, 90)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(labelPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(textoCantidadCarga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(imagenCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(56, 56, 56)
+                        .addComponent(botonCantidadCargaSiguiente)))
+                .addGap(53, 53, 53))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonCantidadCargaSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCantidadCargaSiguienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_botonCantidadCargaSiguienteActionPerformed
+
+    private void textoCantidadCargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoCantidadCargaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textoCantidadCargaActionPerformed
  void addOnClickSiguienteEventListener(ActionListener actionListener) {
         this.botonCantidadCargaSiguiente.addActionListener(actionListener);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonCantidadCargaSiguiente;
+    private javax.swing.JLabel imagenCantidad;
+    private javax.swing.JLabel labelInformacion;
     private javax.swing.JLabel labelPregunta;
+    private javax.swing.JLabel labelTitulo;
     private javax.swing.JTextField textoCantidadCarga;
     // End of variables declaration//GEN-END:variables
  public int getRespuesta() {

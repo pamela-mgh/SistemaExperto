@@ -54,7 +54,7 @@ public class PanelInicio extends javax.swing.JPanel {
             }
         });
 
-        labelFotoInicio.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nicole\\Documents\\NetBeansProjects\\SistemaExperto\\imagenes\\bienvenida.jpg")); // NOI18N
+        labelFotoInicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/bienvenida.jpg"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

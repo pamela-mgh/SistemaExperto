@@ -29,17 +29,15 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="botonTipoCargaSiguiente" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="comboBoxRespuesta" min="-2" pref="292" max="-2" attributes="0"/>
-                          <Component id="labelPregunta" min="-2" pref="327" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jLabel1" pref="0" max="32767" attributes="0"/>
-                          <Component id="jLabel2" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="comboBoxRespuesta" min="-2" pref="292" max="-2" attributes="0"/>
+                  <Component id="labelPregunta" min="-2" pref="327" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="371" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="imagenSuministros" min="-2" max="-2" attributes="0"/>
+                          <Component id="imagenPersonalMilitar" min="-2" pref="300" max="-2" attributes="0"/>
+                          <Component id="botonTipoCargaSiguiente" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -57,13 +55,13 @@
               <EmptySpace max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="63" max="32767" attributes="0"/>
-              <Component id="jLabel1" min="-2" pref="209" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jLabel2" min="-2" pref="227" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace pref="67" max="32767" attributes="0"/>
+              <Component id="imagenPersonalMilitar" min="-2" pref="209" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="imagenSuministros" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               <Component id="botonTipoCargaSiguiente" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -83,10 +81,9 @@
     <Component class="javax.swing.JComboBox" name="comboBoxRespuesta">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
+          <StringArray count="2">
             <StringItem index="0" value="Personal Militar"/>
             <StringItem index="1" value="Suministros"/>
-            <StringItem index="2" value=" "/>
           </StringArray>
         </Property>
       </Properties>
@@ -97,9 +94,11 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="imagenPersonalMilitar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel1"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/ui/personalMilitar.jpg"/>
+        </Property>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[32767, 32767]"/>
         </Property>
@@ -120,7 +119,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonTipoCargaSiguienteActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+    <Component class="javax.swing.JLabel" name="imagenSuministros">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/ui/suministros.jpg"/>
+        </Property>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

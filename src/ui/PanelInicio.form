@@ -97,7 +97,7 @@
     <Component class="javax.swing.JLabel" name="labelFotoInicio">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Nicole\Documents\NetBeansProjects\SistemaExperto\imagenes\bienvenida.jpg"/>
+          <Image iconType="3" name="/ui/bienvenida.jpg"/>
         </Property>
       </Properties>
     </Component>

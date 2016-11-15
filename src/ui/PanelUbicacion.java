@@ -30,9 +30,9 @@ public class PanelUbicacion extends javax.swing.JPanel {
     private void initComponents() {
 
         labelPregunta = new javax.swing.JLabel();
-        comboBoxRespuesta = new javax.swing.JComboBox<>();
+        comboBoxRespuesta = new javax.swing.JComboBox<String>();
         botonSiguiente = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        ubicacionImagen = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(102, 102, 102));
         setMinimumSize(new java.awt.Dimension(800, 600));
@@ -43,7 +43,7 @@ public class PanelUbicacion extends javax.swing.JPanel {
         labelPregunta.setForeground(new java.awt.Color(255, 255, 255));
         labelPregunta.setText("Donde se ubica actualmente?");
 
-        comboBoxRespuesta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Base Militar La Paz", "Base Militar Cochabamba", "Base Militar Santa Cruz" }));
+        comboBoxRespuesta.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Base Militar La Paz", "Base Militar Cochabamba", "Base Militar Santa Cruz" }));
 
         botonSiguiente.setText("Siguiente");
         botonSiguiente.setName("botonUbicacionSiguiente"); // NOI18N
@@ -53,7 +53,7 @@ public class PanelUbicacion extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nicole\\Documents\\NetBeansProjects\\SistemaExperto\\imagenes\\ubicacion.jpg")); // NOI18N
+        ubicacionImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/ubicacion.jpg"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -68,7 +68,7 @@ public class PanelUbicacion extends javax.swing.JPanel {
                             .addComponent(labelPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(comboBoxRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(26, 26, 26)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(ubicacionImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(60, 60, 60))
         );
         layout.setVerticalGroup(
@@ -81,7 +81,7 @@ public class PanelUbicacion extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(168, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ubicacionImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(71, 71, 71)
                 .addComponent(botonSiguiente)
                 .addGap(80, 80, 80))
@@ -99,8 +99,8 @@ public class PanelUbicacion extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonSiguiente;
     private javax.swing.JComboBox<String> comboBoxRespuesta;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel labelPregunta;
+    private javax.swing.JLabel ubicacionImagen;
     // End of variables declaration//GEN-END:variables
 
     public int getRespuesta() {

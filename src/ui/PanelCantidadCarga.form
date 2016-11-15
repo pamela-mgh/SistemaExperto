@@ -27,15 +27,15 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+              <Component id="textoCantidadCarga" min="-2" pref="269" max="-2" attributes="0"/>
+              <EmptySpace pref="469" max="32767" attributes="0"/>
+          </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
               <Component id="botonCantidadCargaSiguiente" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
-              <Component id="textoCantidadCarga" min="-2" pref="84" max="-2" attributes="0"/>
-              <EmptySpace pref="654" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
@@ -51,9 +51,9 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="144" max="-2" attributes="0"/>
               <Component id="textoCantidadCarga" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="349" max="32767" attributes="0"/>
+              <EmptySpace pref="355" max="32767" attributes="0"/>
               <Component id="botonCantidadCargaSiguiente" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">

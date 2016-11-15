@@ -82,7 +82,7 @@
     (transporte-disponible (id ?transporteId))
     (transporte {id == ?transporteId && tipo == avion} (capacidad ?capacidad))
     =>
-    (printout t "El avion que debe utilizar es el " ?transporteId "con capacidad maxima para " ?tipo " de " ?capacidad  crlf)
+    (printout t "Utilizar el avion " ?transporteId "con capacidad maxima para " ?tipo " de " ?capacidad  crlf)
     (assert (tipo-transporte avion)))
 
 

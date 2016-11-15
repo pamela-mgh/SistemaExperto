@@ -30,9 +30,9 @@ public class PanelDestino extends javax.swing.JPanel {
     private void initComponents() {
 
         labelPregunta = new javax.swing.JLabel();
-        comboBoxRespuesta = new javax.swing.JComboBox<>();
+        comboBoxRespuesta = new javax.swing.JComboBox<String>();
         botonSiguiente = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        imagenDestino = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(102, 102, 102));
         setMinimumSize(new java.awt.Dimension(800, 600));
@@ -42,7 +42,7 @@ public class PanelDestino extends javax.swing.JPanel {
         labelPregunta.setForeground(new java.awt.Color(255, 255, 255));
         labelPregunta.setText("Cual es el destino al que quiere ir?");
 
-        comboBoxRespuesta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Base Militar La Paz", "Base Militar Cochabamba", "Base Militar Santa Cruz" }));
+        comboBoxRespuesta.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Base Militar La Paz", "Base Militar Cochabamba", "Base Militar Santa Cruz" }));
         comboBoxRespuesta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBoxRespuestaActionPerformed(evt);
@@ -52,8 +52,8 @@ public class PanelDestino extends javax.swing.JPanel {
         botonSiguiente.setText("Siguiente");
         botonSiguiente.setName("botonDestinoSiguiente"); // NOI18N
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nicole\\Documents\\NetBeansProjects\\SistemaExperto\\imagenes\\destino.jpg")); // NOI18N
-        jLabel1.setText("jLabel1");
+        imagenDestino.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/destino.jpg"))); // NOI18N
+        imagenDestino.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -68,7 +68,7 @@ public class PanelDestino extends javax.swing.JPanel {
                             .addComponent(labelPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(comboBoxRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(imagenDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(56, 56, 56))
         );
         layout.setVerticalGroup(
@@ -80,7 +80,7 @@ public class PanelDestino extends javax.swing.JPanel {
                         .addComponent(labelPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(37, 37, 37)
                         .addComponent(comboBoxRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(imagenDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
                 .addComponent(botonSiguiente)
                 .addGap(88, 88, 88))
@@ -95,7 +95,7 @@ public class PanelDestino extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonSiguiente;
     private javax.swing.JComboBox<String> comboBoxRespuesta;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel imagenDestino;
     private javax.swing.JLabel labelPregunta;
     // End of variables declaration//GEN-END:variables
     public int getRespuesta() {

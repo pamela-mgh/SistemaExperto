@@ -31,9 +31,9 @@ public class PanelTipoCarga extends javax.swing.JPanel {
 
         labelPregunta = new javax.swing.JLabel();
         comboBoxRespuesta = new javax.swing.JComboBox<String>();
-        jLabel1 = new javax.swing.JLabel();
+        imagenPersonalMilitar = new javax.swing.JLabel();
         botonTipoCargaSiguiente = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        imagenSuministros = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(102, 102, 102));
         setMinimumSize(new java.awt.Dimension(800, 600));
@@ -43,17 +43,17 @@ public class PanelTipoCarga extends javax.swing.JPanel {
         labelPregunta.setForeground(new java.awt.Color(255, 255, 255));
         labelPregunta.setText("¿Que tipo de carga desea llevar?");
 
-        comboBoxRespuesta.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Personal Militar", "Suministros", " " }));
+        comboBoxRespuesta.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Personal Militar", "Suministros" }));
         comboBoxRespuesta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBoxRespuestaActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("jLabel1");
-        jLabel1.setMaximumSize(new java.awt.Dimension(32767, 32767));
-        jLabel1.setMinimumSize(new java.awt.Dimension(800, 600));
-        jLabel1.setPreferredSize(new java.awt.Dimension(800, 600));
+        imagenPersonalMilitar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/personalMilitar.jpg"))); // NOI18N
+        imagenPersonalMilitar.setMaximumSize(new java.awt.Dimension(32767, 32767));
+        imagenPersonalMilitar.setMinimumSize(new java.awt.Dimension(800, 600));
+        imagenPersonalMilitar.setPreferredSize(new java.awt.Dimension(800, 600));
 
         botonTipoCargaSiguiente.setText("Siguiente");
         botonTipoCargaSiguiente.setName("botonTipoCargaSiguiente"); // NOI18N
@@ -63,22 +63,23 @@ public class PanelTipoCarga extends javax.swing.JPanel {
             }
         });
 
+        imagenSuministros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/suministros.jpg"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(botonTipoCargaSiguiente)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(comboBoxRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comboBoxRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(44, 44, 44)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(371, 371, 371)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(imagenSuministros)
+                            .addComponent(imagenPersonalMilitar, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(botonTipoCargaSiguiente))))
                 .addGap(60, 87, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -90,13 +91,13 @@ public class PanelTipoCarga extends javax.swing.JPanel {
                 .addComponent(comboBoxRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(63, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addContainerGap(67, Short.MAX_VALUE)
+                .addComponent(imagenPersonalMilitar, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(imagenSuministros)
+                .addGap(28, 28, 28)
                 .addComponent(botonTipoCargaSiguiente)
-                .addGap(45, 45, 45))
+                .addGap(62, 62, 62))
         );
     }// </editor-fold>//GEN-END:initComponents
  
@@ -112,8 +113,8 @@ public class PanelTipoCarga extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonTipoCargaSiguiente;
     private javax.swing.JComboBox<String> comboBoxRespuesta;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel imagenPersonalMilitar;
+    private javax.swing.JLabel imagenSuministros;
     private javax.swing.JLabel labelPregunta;
     // End of variables declaration//GEN-END:variables
  void addOnClickSiguienteEventListener(ActionListener actionListener) {

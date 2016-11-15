@@ -76,17 +76,7 @@
     (ubicacion-inicial (id ?ubicacionId))
     ?transporte <- (transporte {ubicacion == ?ubicacionId && capacidad >= ?cantidad} (id ?transporteId) (tipo ?tipo) (capacidad ?capacidad))
     =>
-    (printout t "Existe transporte disponible" crlf)
     (assert (transporte-disponible (id ?transporteId) (tipo ?tipo) (capacidad ?capacidad) (ubicacion ?ubicacionId))))
-
-; REGLAS DE TIPO DE AVION
-;(defrule tipo-avion
-;    (carga (tipo ?tipo))
-;    (transporte-disponible (id ?transporteId))
-;    (transporte {id == ?transporteId && tipo == avion} (capacidad ?capacidad))
-;    =>
-;    (printout t "Utilizar el avion " ?transporteId "con capacidad maxima para " ?tipo " de " ?capacidad  crlf)
-;    (assert (tipo-transporte avion)))
 
 
 ; REGLAS DE DESCARGA
@@ -94,49 +84,40 @@
 (defrule personal-militar-desciende-en-paracaidas
     (ubicacion-destino (id ?uId))
     (ubicacion {id == ?uId && estado == NO_DISPONIBLE && razon == "conflicto armado"})
-    (transporte-disponible (id ?transporteId))
-    (transporte {id == ?transporteId && tipo == avion})
+    (transporte-disponible {tipo == avion})
     (carga (tipo personal-militar))
     =>
-    (printout t "Ordenar al personal militar que descienda en paracaidas" crlf)
     (assert (personal-militar-desciende-en-paracaidas)))
 
 (defrule soltar-carga-en-paracaidas
     (ubicacion-destino (id ?uId))
     (ubicacion {id == ?uId && estado == NO_DISPONIBLE && razon == "conflicto armado"})
-    (transporte-disponible (id ?transporteId))
-    (transporte {id == ?transporteId && tipo == avion})
+    (transporte-disponible {tipo == avion})
     (carga (tipo suministros))
     =>
-    (printout t "Soltar carga en paracaidas" crlf)
     (assert (soltar-carga-en-paracaidas)))
 
-(defrule aterrizar-en-ubicacion-cercana
+(defrule aterrizar-helicoptero-en-punto-cercano
     (ubicacion-destino (id ?uId))
     (ubicacion {id == ?uId && estado == NO_DISPONIBLE && razon == "conflicto armado"})
-    (transporte-disponible (id ?transporteId))
-    (transporte {id == ?transporteId && tipo == helicoptero})
+    (transporte-disponible {tipo == helicoptero})
     =>
-    (printout t "Aterrizar en punto cercano" crlf)
-    (assert (aterrizar-en-punto-cercano)))
+    (assert (aterrizar-helicoptero-en-punto-cercano)))
 
-(defrule aterrizar-normalmente-avion
+(defrule aterrizar-avion-normalmente
     (ubicacion-destino (id ?uId))
     (ubicacion {id == ?uId && estado == DISPONIBLE})
-    (transporte-disponible (id ?transporteId))
-    (transporte {id == ?transporteId && tipo == avion})
+    (transporte-disponible {tipo == avion})
     =>
-    (printout t "El destino esta disponbible para que el avion aterrize" crlf)
-    (assert (avion-puede-aterrizar-normalmente)))
+    (assert (aterrizar-avion-normalmente)))
 
-(defrule aterrizar-normalmente-helicoptero
+(defrule aterrizar-helicoptero-normalmente
     (ubicacion-destino (id ?uId))
     (ubicacion {id == ?uId && estado == DISPONIBLE})
     (transporte-disponible (id ?transporteId))
     (transporte {id == ?transporteId && tipo == helicoptero})
     =>
-    (printout t "El destino esta disponbible para que el helicoptero aterrize" crlf)
-    (assert (helicoptero-puede-aterrizar-normalmente)))
+    (assert (aterrizar-helicoptero-normalmente)))
 
 ; REGLAS DE DISPONIBILIDAD DE AEROPUERTO
 
@@ -145,12 +126,12 @@
     (ubicacion-inicial (id ?uId))
     (ubicacion {id == ?uId && estado == NO_DISPONIBLE} (razon ?razon))
     =>
-    (printout t "Aeropuerto inicial no disponible para despegar por " ?razon "." crlf))
+    (assert (aeropuerto-inicial-no-disponible)))
 
 (defrule aeropuerto-destino-no-disponible
     "Verifica si el aeropuerto destino no esta disponible"
     (ubicacion-destino (id ?uId))
     (ubicacion {id == ?uId && estado == NO_DISPONIBLE} (razon ?razon))
     =>
-    (printout t "Aeropuerto destino no disponible para aterrizar por " ?razon "." crlf))
+    (assert (aeropuerto-destino-no-disponible)))
 (reset)

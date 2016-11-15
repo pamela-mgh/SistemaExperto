@@ -52,31 +52,31 @@
 ; ********************
 
 (deffacts escenario "Definicion del escenario"
-        (ubicacion (id bm_la_paz) (nombre "Base Militar La Paz"))
+    (ubicacion (id bm_la_paz) (nombre "Base Militar La Paz"))
 	(ubicacion (id bm_cbba) (nombre "Base Militar Cochabamba") (estado NO_DISPONIBLE) (razon "conflicto armado"))
 	(ubicacion (id bm_santa_cruz) (nombre "Base Militar Santa Cruz"))
 	(ubicacion (id bm_sucre) (nombre "Base Militar Sucre"))
-        (ubicacion (id bm_potosi) (nombre "Base Militar Potosi"))
-        (ruta (inicio bm_santa_cruz) (fin bm_la_paz))
-	(ruta (inicio bm_santa_cruz) (fin bm_cbba))
-        (ruta (inicio bm_santa_cruz) (fin bm_sucre))
-        (ruta (inicio bm_santa_cruz) (fin bm_potosi))
-        (ruta (inicio bm_la_paz) (fin bm_santa_cruz) (estado COMPROMETIDO))
-        (ruta (inicio bm_la_paz) (fin bm_cbba))
-        (ruta (inicio bm_la_paz) (fin bm_sucre))
-        (ruta (inicio bm_la_paz) (fin bm_potosi))
-	(ruta (inicio bm_cbba) (fin bm_santa_cruz))
-	(ruta (inicio bm_cbba) (fin bm_la_paz))
-        (ruta (inicio bm_cbba) (fin bm_sucre))
-        (ruta (inicio bm_cbba) (fin bm_potosi))
-        (ruta (inicio bm_sucre) (fin bm_potosi) (estado COMPROMETIDO))
-        (ruta (inicio bm_sucre) (fin bm_la_paz))
-        (ruta (inicio bm_sucre) (fin bm_cbba))
-        (ruta (inicio bm_sucre) (fin bm_santa_cruz))
-        (ruta (inicio bm_potosi) (fin bm_sucre))
-        (ruta (inicio bm_potosi) (fin bm_la_paz))
-        (ruta (inicio bm_potosi) (fin bm_cbba))
-        (ruta (inicio bm_potosi) (fin bm_santa_cruz))
+    (ubicacion (id bm_potosi) (nombre "Base Militar Potosi"))
+    (ruta (inicio bm_santa_cruz) (fin bm_la_paz) (distancia 4506))
+	(ruta (inicio bm_santa_cruz) (fin bm_cbba) (distancia 4506))
+    (ruta (inicio bm_santa_cruz) (fin bm_sucre) (distancia 806))
+    (ruta (inicio bm_santa_cruz) (fin bm_potosi) (distancia 468))
+    (ruta (inicio bm_la_paz) (fin bm_santa_cruz) (distancia 5516) (estado COMPROMETIDO))
+    (ruta (inicio bm_la_paz) (fin bm_cbba) (distancia 3438))
+    (ruta (inicio bm_la_paz) (fin bm_sucre) (distancia 436))
+    (ruta (inicio bm_la_paz) (fin bm_potosi) (distancia 1416))
+	(ruta (inicio bm_cbba) (fin bm_santa_cruz) (distancia 426))
+	(ruta (inicio bm_cbba) (fin bm_la_paz) (distancia 2406))
+    (ruta (inicio bm_cbba) (fin bm_sucre) (distancia 3883))
+    (ruta (inicio bm_cbba) (fin bm_potosi) (distancia 8848))
+    (ruta (inicio bm_sucre) (fin bm_potosi) (distancia 348) (estado COMPROMETIDO))
+    (ruta (inicio bm_sucre) (fin bm_la_paz) (distancia 1684))
+    (ruta (inicio bm_sucre) (fin bm_cbba) (distancia 3538))
+    (ruta (inicio bm_sucre) (fin bm_santa_cruz) (distancia 3184))
+    (ruta (inicio bm_potosi) (fin bm_sucre) (distancia 8433))
+    (ruta (inicio bm_potosi) (fin bm_la_paz) (distancia 572))
+    (ruta (inicio bm_potosi) (fin bm_cbba) (distancia 9983))
+    (ruta (inicio bm_potosi) (fin bm_santa_cruz) (distancia 5656))
 	(transporte (id A0X-1) (tipo avion) (capacidad 500) (combustible 100) (ubicacion bm_la_paz))
 	(transporte (id A0X-3) (tipo avion) (capacidad 200) (combustible 100) (ubicacion bm_cbba))
 	(transporte (id H0X-2) (tipo helicoptero) (capacidad 100) (combustible 80) (ubicacion bm_santa_cruz))
@@ -159,32 +159,23 @@
     =>
     (assert (aeropuerto-destino-no-disponible)))
 
-(defrule aterrizar-en-ubicacion-cercana-para-recargar-combustible
-    (ubicacion-destino (id ?uId))
-    (ubicacion {id == ?uId && estado == NO_DISPONIBLE && razon == "bajo en combustible"})
-    (transporte-disponible (id ?transporteId))
-    (transporte {id == ?transporteId && tipo == helicoptero})
-    =>
-    (printout t "Aterrizar en punto cercano para recargar combustible" crlf)
-    (assert (aterrizar-en-ubicacion-cercana-para-recargar-combustible)))
-
 (defrule aeropuerto-destino-no-disponible-por-cuasas-naturales
     (ubicacion-destino (id ?uId))
     (ubicacion {id == ?uId && estado == NO_DISPONIBLE && razon == "cuasas naturales"})
     =>
-    (printout t "El destino no esta disponbible por " ?razon "." crlf))
+    (assert (accion (texto "El destino no esta disponbible por causas naturales"))))
 
 (defrule aeropuerto-destino-no-disponible-por-bombardeo
     (ubicacion-destino (id ?uId))
     (ubicacion {id == ?uId && estado == NO_DISPONIBLE && razon == "bombardeo"})
     =>
-    (printout t "El destino no esta disponbible por " ?razon "." crlf))
+    (assert (accion (texto "El destino no esta disponbible por bombardeo"))))
 
 (defrule aeropuerto-destino-no-disponible-por-mal-pistas
     (ubicacion-destino (id ?uId))
-    (ubicacion {id == ?uId && estado == NO_DISPONIBLE && razon == "mal pistas de aterizaje"})
+    (ubicacion {id == ?uId && estado == NO_DISPONIBLE && razon == "pista en mal estado"})
     =>
-    (printout t "El destino no esta disponbible por " ?razon "." crlf))
+    (assert (accion (texto "El destino no esta disponbible por pista en mal estado"))))
 
 
 ;--------------------------------------------------
@@ -195,9 +186,22 @@
 (defglobal ?*kmporltHELICPOTERO* = 50)
 
 (defrule distancia-maxima-de-transporte-disponible
-    (ubicacion-inicial (id ?idIni))
-    (ubicacion-destino (id ?idDes))
-    (ruta {inicio == ?idIni && fin == ?idDes} (distancia ?distanciaRuta))
     ?transporte-disponible <- (transporte-disponible (id ?transporteId) (combustible ?combustible))
     =>
     (modify ?transporte-disponible (distancia-maxima (MaxDistancia ?combustible))))
+
+(defrule combustible-suficiente
+    (ubicacion-inicial (id ?idIni))
+    (ubicacion-destino (id ?idDes))
+    (ruta {inicio == ?idIni && fin == ?idDes} (distancia ?distancia-ruta))
+    (transporte-disponible {distancia-maxima != nil && distancia-maxima >= ?distancia-ruta})
+    =>
+    (assert (accion (texto "El combustible es suficiente para el vuelo."))))
+
+(defrule combustible-insuficiente
+    (ubicacion-inicial (id ?idIni))
+    (ubicacion-destino (id ?idDes))
+    (ruta {inicio == ?idIni && fin == ?idDes} (distancia ?distancia-ruta))
+    (transporte-disponible {distancia-maxima != nil && distancia-maxima < ?distancia-ruta})
+    =>
+    (assert (accion (texto "Hacer escala para recargar combustible."))))

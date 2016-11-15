@@ -15,7 +15,7 @@
     (slot estado (default DISPONIBLE))
     (slot inicio) ;<inicio> es la ubicacion donde empieza la ruta
     (slot fin) ;<fin> es la ubicacion donde termina la ruta
-    (slot distancia))
+    (slot distancia (type INTEGER)))
 
 (deftemplate carga
     "La carga que se desea transportar"
@@ -43,12 +43,6 @@
     (slot capacidad)
     (slot ubicacion))
 
-(deftemplate transporte-no-disponible
-    (slot id)
-    (slot tipo)
-    (slot capacidad)
-    (slot ubicacion))
-
 (deftemplate accion
     (slot texto (type STRING)))
 ; ********************
@@ -61,7 +55,17 @@
 	(ubicacion (id bm_santa_cruz) (nombre "Base Militar Santa Cruz"))
 	(ubicacion (id bm_sucre) (nombre "Base Militar Sucre"))
         (ubicacion (id bm_potosi) (nombre "Base Militar Potosi"))
-
+        (ruta (inicio bm_santa_cruz) (fin bm_la_paz) (distancia 2000))
+	(ruta (inicio bm_la_paz) (fin bm_santa_cruz) (estado COMPROMETIDO) (distancia 200))
+	(ruta (inicio bm_santa_cruz) (fin bm_cbba) (distancia 1000))
+	(ruta (inicio bm_cbba) (fin bm_santa_cruz) (distancia 1000))
+	(ruta (inicio bm_la_paz) (fin bm_cbba)(distancia 3000))
+	(ruta (inicio bm_cbba) (fin bm_la_paz)(distancia 3000))
+        (ruta (inicio bm_sucre) (fin bm_potosi) (estado COMPROMETIDO)(distancia 4500))
+        (ruta (inicio bm_potosi) (fin bm_sucre)(distancia 4500))
+	(transporte (id A0X-1) (tipo avion) (capacidad 500) (combustible 500) (ubicacion bm_la_paz))
+	(transporte (id A0X-3) (tipo avion) (capacidad 200) (combustible 500) (ubicacion bm_cbba))
+	(transporte (id A0X-5) (tipo helicoptero) (capacidad 100) (combustible 500) (ubicacion bm_santa_cruz))
         (ruta (inicio bm_santa_cruz) (fin bm_la_paz))
 	(ruta (inicio bm_santa_cruz) (fin bm_cbba))
         (ruta (inicio bm_santa_cruz) (fin bm_sucre))
@@ -82,7 +86,6 @@
         (ruta (inicio bm_potosi) (fin bm_la_paz))
         (ruta (inicio bm_potosi) (fin bm_cbba))
         (ruta (inicio bm_potosi) (fin bm_santa_cruz))
-
 	(transporte (id A0X-1) (tipo avion) (capacidad 500) (combustible 100) (ubicacion bm_la_paz))
 	(transporte (id A0X-3) (tipo avion) (capacidad 200) (combustible 100) (ubicacion bm_cbba))
 	(transporte (id H0X-2) (tipo helicoptero) (capacidad 100) (combustible 80) (ubicacion bm_santa_cruz))
@@ -105,9 +108,9 @@
 (defrule si-capacidad-transporte-es-menor-a-cantidad-carga-entonces-transporte-no-disponible
     (carga (cantidad ?cantidad))
     (ubicacion-inicial (id ?ubicacionId))
-    ?transporte <- (transporte {ubicacion == ?ubicacionId && capacidad < ?cantidad} (id ?transporteId) (tipo ?tipo) (capacidad ?capacidad))
+    ?transporte <- (transporte {ubicacion == ?ubicacionId && capacidad < ?cantidad})
     =>
-    (assert (transporte-no-disponible (id ?transporteId) (tipo ?tipo) (capacidad ?capacidad) (ubicacion ?ubicacionId))))
+    (assert (transporte-no-disponible)))
 
 ; REGLAS DE DESCARGA
 
@@ -149,15 +152,6 @@
     =>
     (assert (accion (texto "Aterrizar el helicoptero normalmente"))))
 
-(defrule aterrizar-en-ubicacion-cercana-para-recargar-combustible
-    (ubicacion-destino (id ?uId))
-    (ubicacion {id == ?uId && estado == NO_DISPONIBLE && razon == "bajo en combustible"})
-    (transporte-disponible (id ?transporteId))
-    (transporte {id == ?transporteId && tipo == helicoptero})
-    =>
-    (printout t "Aterrizar en punto cercano para recargar combustible" crlf)
-    (assert (aterrizar-en-ubicacion-cercana-para-recargar-combustible)))
-
 ; REGLAS DE DISPONIBILIDAD DE AEROPUERTO
 
 (defrule aeropuerto-inicial-no-disponible
@@ -173,6 +167,15 @@
     (ubicacion {id == ?uId && estado == NO_DISPONIBLE} (razon ?razon))
     =>
     (assert (aeropuerto-destino-no-disponible)))
+
+(defrule aterrizar-en-ubicacion-cercana-para-recargar-combustible
+    (ubicacion-destino (id ?uId))
+    (ubicacion {id == ?uId && estado == NO_DISPONIBLE && razon == "bajo en combustible"})
+    (transporte-disponible (id ?transporteId))
+    (transporte {id == ?transporteId && tipo == helicoptero})
+    =>
+    (printout t "Aterrizar en punto cercano para recargar combustible" crlf)
+    (assert (aterrizar-en-ubicacion-cercana-para-recargar-combustible)))
 
 (defrule aeropuerto-destino-no-disponible-por-cuasas-naturales
     (ubicacion-destino (id ?uId))
@@ -193,4 +196,19 @@
     (printout t "El destino no esta disponbible por " ?razon "." crlf))
 
 
-(reset)
+;--------------------------------------------------
+(deffunction MaxDistancia (?a ?b)
+      (return * ?a ?b))
+
+(defglobal ?*kmporltAVION* = 100)
+(defglobal ?*kmporltHELICPOTERO* = 50)
+
+(defrule distancia-maxima-de-transporte-disponible
+    (ubicacion-inicial (id ?idIni))
+    (ubicacion-destino (id ?idDes))
+    (ruta {inicio == ?idIni && fin == ?idDes} (distancia ?distanciaRuta))
+    ?transporte-disponible <- (transporte-disponible (id ?transporteId) (combustible ?combustible))
+    =>
+    (modify ?transporte-disponible (distancia-maxima(MaxDistancia(?combustible ?*kmporltAVION*)))))
+
+;NO CORRER PORQUE NECESITA SLOT DE COMBUSTIBLE EN TRANSPORTE-DISPONIBLE

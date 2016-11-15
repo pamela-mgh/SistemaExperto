@@ -99,7 +99,7 @@ public class PanelRespuesta extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     void mostrarPlan(List<String> plan) {
-        String respuesta = "<html>El plan a seguir es:<br>";
+        String respuesta = "<html>";
         for (int i = 0; i < plan.size(); i++) {
             respuesta += plan.get(i) + "<br>";
         }

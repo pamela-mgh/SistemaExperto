@@ -38,7 +38,10 @@
     (slot ubicacion (default base-militar)))
 
 (deftemplate transporte-disponible
-    (slot id))
+    (slot id)
+    (slot tipo)
+    (slot capacidad)
+    (slot ubicacion))
 
 ; ********************
 ; DEFINICION DE HECHOS
@@ -71,19 +74,19 @@
 (defrule verificacion-disponibilidad-transporte
     (carga (cantidad ?cantidad))
     (ubicacion-inicial (id ?ubicacionId))
-    ?transporte <- (transporte {ubicacion == ?ubicacionId && capacidad >= ?cantidad} (id ?transporteId))
+    ?transporte <- (transporte {ubicacion == ?ubicacionId && capacidad >= ?cantidad} (id ?transporteId) (tipo ?tipo) (capacidad ?capacidad))
     =>
     (printout t "Existe transporte disponible" crlf)
-    (assert (transporte-disponible (id ?transporteId))))
+    (assert (transporte-disponible (id ?transporteId) (tipo ?tipo) (capacidad ?capacidad) (ubicacion ?ubicacionId))))
 
 ; REGLAS DE TIPO DE AVION
-(defrule tipo-avion
-    (carga (tipo ?tipo))
-    (transporte-disponible (id ?transporteId))
-    (transporte {id == ?transporteId && tipo == avion} (capacidad ?capacidad))
-    =>
-    (printout t "Utilizar el avion " ?transporteId "con capacidad maxima para " ?tipo " de " ?capacidad  crlf)
-    (assert (tipo-transporte avion)))
+;(defrule tipo-avion
+;    (carga (tipo ?tipo))
+;    (transporte-disponible (id ?transporteId))
+;    (transporte {id == ?transporteId && tipo == avion} (capacidad ?capacidad))
+;    =>
+;    (printout t "Utilizar el avion " ?transporteId "con capacidad maxima para " ?tipo " de " ?capacidad  crlf)
+;    (assert (tipo-transporte avion)))
 
 
 ; REGLAS DE DESCARGA

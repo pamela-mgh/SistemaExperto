@@ -3,6 +3,7 @@ package ui;
 import controladores.ControladorMotorInferencia;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -124,6 +125,9 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
                     controladorMotorInferencia.insertarHecho(hecho);
                     try {
                         controladorMotorInferencia.ejecutar();
+                        List<String> plan = controladorMotorInferencia.getPlan();
+                        cambiarPanel(panelRespuesta);
+                        panelRespuesta.mostrarPlan(plan);                        
                     } catch (JessException ex) {
                         Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                     }

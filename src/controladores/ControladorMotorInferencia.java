@@ -1,6 +1,8 @@
 package controladores;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jess.Fact;
@@ -42,5 +44,23 @@ public class ControladorMotorInferencia {
             }
         }
         throw new JessException("No hay un plan", "No hay respuesta", "No hay respuesta");
+    }
+
+    public List<String> getPlan() throws JessException {
+        List<String> plan = new ArrayList<>();
+        Iterator<Fact> it = motorInferencia.listFacts();
+        while (it.hasNext()) {
+            Fact hecho = it.next();
+            switch(hecho.getName()) {
+                case "MAIN::transporte-disponible":
+                    String accion = "";
+                    String tipo = hecho.getSlotValue("tipo").toString();
+                    String id = hecho.getSlotValue("id").toString();
+                    accion += "Usar el " + tipo + " " + id;
+                    plan.add(accion);
+                    break;
+            }
+        }
+        return plan;
     }
 }

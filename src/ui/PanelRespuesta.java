@@ -5,6 +5,7 @@
  */
 package ui;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jess.JessException;
@@ -60,29 +61,10 @@ public class PanelRespuesta extends javax.swing.JPanel {
     private javax.swing.JLabel labelRespuesta;
     // End of variables declaration//GEN-END:variables
 
-    void mostrarCamino(ValueVector camino) {
-        String respuesta = "El camino que debe seguir es:\n";
-        for (int i = 0; i < camino.size(); i++) {
-            Value valor;
-            try {
-                valor = camino.get(i);
-                switch (valor.toString()) {
-                    case "bm_la_paz":
-                        respuesta += " Base militar La Paz\n";
-                        break;
-                    case "bm_cbba":
-                        respuesta += " Base militar Cochabamba\n";
-                        break;
-                    case "bm_santa_cruz":
-                        respuesta += " Base militar Santa Cruz\n";
-                        break;
-                }
-                if (i < camino.size()-1) {
-                    respuesta += " - ";
-                }
-            } catch (JessException ex) {
-                Logger.getLogger(PanelRespuesta.class.getName()).log(Level.SEVERE, null, ex);
-            }
+    void mostrarPlan(List<String> plan) {
+        String respuesta = "El plan a seguir es:\n";
+        for (int i = 0; i < plan.size(); i++) {
+            respuesta += plan.get(i);
         }
         labelRespuesta.setText(respuesta);
     }

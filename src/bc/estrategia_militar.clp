@@ -96,21 +96,21 @@
     (transporte-disponible {tipo == avion})
     (carga (tipo suministros))
     =>
-    (assert (soltar-carga-en-paracaidas)))
+    (assert (accion (texto "Soltar la carga en paracaidas"))))
 
 (defrule aterrizar-helicoptero-en-punto-cercano
     (ubicacion-destino (id ?uId))
     (ubicacion {id == ?uId && estado == NO_DISPONIBLE && razon == "conflicto armado"})
     (transporte-disponible {tipo == helicoptero})
     =>
-    (assert (aterrizar-helicoptero-en-punto-cercano)))
+    (assert (accion (texto "Aterrizar el helicoptero en un punto cercano"))))
 
 (defrule aterrizar-avion-normalmente
     (ubicacion-destino (id ?uId))
     (ubicacion {id == ?uId && estado == DISPONIBLE})
     (transporte-disponible {tipo == avion})
     =>
-    (assert (aterrizar-avion-normalmente)))
+    (assert (accion (texto "Aterrizar el avion normalmente"))))
 
 (defrule aterrizar-helicoptero-normalmente
     (ubicacion-destino (id ?uId))
@@ -118,7 +118,7 @@
     (transporte-disponible (id ?transporteId))
     (transporte {id == ?transporteId && tipo == helicoptero})
     =>
-    (assert (aterrizar-helicoptero-normalmente)))
+    (assert (accion (texto "Aterrizar el helicoptero normalmente"))))
 
 ; REGLAS DE DISPONIBILIDAD DE AEROPUERTO
 

@@ -15,7 +15,7 @@
     (slot estado (default DISPONIBLE))
     (slot inicio) ;<inicio> es la ubicacion donde empieza la ruta
     (slot fin) ;<fin> es la ubicacion donde termina la ruta
-    (slot distancia))
+    (slot distancia (type INTEGER)))
 
 (deftemplate carga
     "La carga que se desea transportar"
@@ -41,6 +41,8 @@
     (slot id)
     (slot tipo)
     (slot capacidad)
+    (slot distancia-maxima)
+    (slot combustible)
     (slot ubicacion))
 
 (deftemplate accion
@@ -55,6 +57,19 @@
 	(ubicacion (id bm_santa_cruz) (nombre "Base Militar Santa Cruz"))
 	(ubicacion (id bm_sucre) (nombre "Base Militar Sucre"))
         (ubicacion (id bm_potosi) (nombre "Base Militar Potosi"))
+<<<<<<< HEAD
+        (ruta (inicio bm_santa_cruz) (fin bm_la_paz) (distancia 2000))
+	(ruta (inicio bm_la_paz) (fin bm_santa_cruz) (estado COMPROMETIDO) (distancia 200))
+	(ruta (inicio bm_santa_cruz) (fin bm_cbba) (distancia 1000))
+	(ruta (inicio bm_cbba) (fin bm_santa_cruz) (distancia 1000))
+	(ruta (inicio bm_la_paz) (fin bm_cbba)(distancia 3000))
+	(ruta (inicio bm_cbba) (fin bm_la_paz)(distancia 3000))
+        (ruta (inicio bm_sucre) (fin bm_potosi) (estado COMPROMETIDO)(distancia 4500))
+        (ruta (inicio bm_potosi) (fin bm_sucre)(distancia 4500))
+	(transporte (id A0X-1) (tipo avion) (capacidad 500) (combustible 500) (ubicacion bm_la_paz))
+	(transporte (id A0X-3) (tipo avion) (capacidad 200) (combustible 500) (ubicacion bm_cbba))
+	(transporte (id A0X-5) (tipo helicoptero) (capacidad 100) (combustible 500) (ubicacion bm_santa_cruz)))
+=======
 
         (ruta (inicio bm_santa_cruz) (fin bm_la_paz))
 	(ruta (inicio bm_santa_cruz) (fin bm_cbba))
@@ -82,6 +97,7 @@
 	(transporte (id H0X-2) (tipo helicoptero) (capacidad 100) (combustible 80) (ubicacion bm_santa_cruz))
 	(transporte (id A0X-2) (tipo avion) (capacidad 200) (combustible 100) (ubicacion bm_sucre))
 	(transporte (id H0X-4) (tipo helicoptero) (capacidad 100) (combustible 80) (ubicacion bm_potosi)))
+>>>>>>> 021e59874f6e7243fb957fca43a911907fe008e2
 
 ; ******
 ; REGLAS
@@ -143,15 +159,6 @@
     =>
     (assert (accion (texto "Aterrizar el helicoptero normalmente"))))
 
-(defrule aterrizar-en-ubicacion-cercana-para-recargar-combustible
-    (ubicacion-destino (id ?uId))
-    (ubicacion {id == ?uId && estado == NO_DISPONIBLE && razon == "bajo en combustible"})
-    (transporte-disponible (id ?transporteId))
-    (transporte {id == ?transporteId && tipo == helicoptero})
-    =>
-    (printout t "Aterrizar en punto cercano para recargar combustible" crlf)
-    (assert (aterrizar-en-ubicacion-cercana-para-recargar-combustible)))
-
 ; REGLAS DE DISPONIBILIDAD DE AEROPUERTO
 
 (defrule aeropuerto-inicial-no-disponible
@@ -167,6 +174,15 @@
     (ubicacion {id == ?uId && estado == NO_DISPONIBLE} (razon ?razon))
     =>
     (assert (aeropuerto-destino-no-disponible)))
+
+(defrule aterrizar-en-ubicacion-cercana-para-recargar-combustible
+    (ubicacion-destino (id ?uId))
+    (ubicacion {id == ?uId && estado == NO_DISPONIBLE && razon == "bajo en combustible"})
+    (transporte-disponible (id ?transporteId))
+    (transporte {id == ?transporteId && tipo == helicoptero})
+    =>
+    (printout t "Aterrizar en punto cercano para recargar combustible" crlf)
+    (assert (aterrizar-en-ubicacion-cercana-para-recargar-combustible)))
 
 (defrule aeropuerto-destino-no-disponible-por-cuasas-naturales
     (ubicacion-destino (id ?uId))
@@ -185,5 +201,17 @@
     (ubicacion {id == ?uId && estado == NO_DISPONIBLE && razon == "mal pistas de aterizaje"})
     =>
     (printout t "El destino no esta disponbible por " ?razon "." crlf))
+;--------------------------------------------------
+(deffunction MaxDistancia (?a ?b)
+      (return * ?a ?b))
 
-(reset)
+(defglobal ?*kmporltAVION* = 100)
+(defglobal ?*kmporltHELICPOTERO* = 50)
+
+(defrule distancia-maxima-de-transporte-disponible
+    (ubicacion-inicial (id ?idIni))
+    (ubicacion-destino (id ?idDes))
+    (ruta {inicio == ?idIni && fin == ?idDes} (distancia ?distanciaRuta))
+    ?transporte-disponible <- (transporte-disponible (id ?transporteId) (combustible ?combustible))
+    =>
+    (modify ?transporte-disponible (distancia-maxima(MaxDistancia(?combustible ?*kmporltAVION*)))))

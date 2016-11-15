@@ -43,7 +43,7 @@ public class PanelUbicacion extends javax.swing.JPanel {
         labelPregunta.setForeground(new java.awt.Color(255, 255, 255));
         labelPregunta.setText("Donde se ubica actualmente?");
 
-        comboBoxRespuesta.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Base Militar La Paz", "Base Militar Cochabamba", "Base Militar Santa Cruz" }));
+        comboBoxRespuesta.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Base Militar La Paz", "Base Militar Cochabamba", "Base Militar Santa Cruz", "Base Militar Sucre", "Base Militar Potosi" }));
 
         botonSiguiente.setText("Siguiente");
         botonSiguiente.setName("botonUbicacionSiguiente"); // NOI18N

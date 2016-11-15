@@ -78,10 +78,12 @@
     <Component class="javax.swing.JComboBox" name="comboBoxRespuesta">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
+          <StringArray count="5">
             <StringItem index="0" value="Base Militar La Paz"/>
             <StringItem index="1" value="Base Militar Cochabamba"/>
             <StringItem index="2" value="Base Militar Santa Cruz"/>
+            <StringItem index="3" value="Base Militar Sucre"/>
+            <StringItem index="4" value="Base Militar Potosi"/>
           </StringArray>
         </Property>
       </Properties>
